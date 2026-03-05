@@ -294,6 +294,10 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif;background
     <div class="screen active" id="s-nowy">
       <div class="page-hd">
         <h1>📋 Nowy protokół</h1>
+        <button onclick="wczytajSzkic()" style="font-size:11px;padding:5px 10px;background:var(--surface2);
+          border:1px solid var(--border);border-radius:8px;color:var(--muted);cursor:pointer">
+          📂 Wczytaj szkic
+        </button>
         <p>Wypełnij formularz przeglądu instalacji</p>
       </div>
 
@@ -431,8 +435,8 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif;background
       </div>
 
       <div style="padding:0 0 8px">
-        <button class="btn btn-red" onclick="zapiszProtokol()">💾 Zapisz protokół</button>
-        <button class="btn btn-green" onclick="zapiszIPrzeslij()">📤 Zapisz i wyślij na serwer</button>
+        <button class="btn btn-red" onclick="zapiszProtokol()" style="background:var(--surface2);color:var(--text);border:1px solid var(--border)">💾 Zapisz szkic</button>
+        <button class="btn btn-green" onclick="zapiszIPrzeslij()">📤 Zapisz i wyślij</button>
         <button class="btn btn-ghost" onclick="resetForm()">🔄 Wyczyść formularz</button>
       </div>
     </div>
@@ -705,6 +709,7 @@ Content-Type: application/json
 <script>
 // ===================== DATA =====================
 const SK = 'profipoz_v1';
+const SK_DRAFT = 'profipoz_draft';
 let protokoly = JSON.parse(localStorage.getItem(SK) || '[]');
 
 
@@ -1172,11 +1177,47 @@ function valid(d) {
 
 function zapiszProtokol() {
   const d = getForm();
-  if (!valid(d)) return;
-  protokoly.push(d);
-  localStorage.setItem(SK, JSON.stringify(protokoly));
-  toast('✅ Protokół zapisany!');
-  updateBadge(); resetForm();
+  if (!d.obiekt && !d.typ) { toast('⚠️ Uzupełnij chociaż obiekt lub typ instalacji'); return; }
+  d._draft = true;
+  localStorage.setItem(SK_DRAFT, JSON.stringify(d));
+  toast('💾 Szkic zapisany — możesz wrócić później!');
+}
+
+function wczytajSzkic() {
+  const raw = localStorage.getItem(SK_DRAFT);
+  if (!raw) { toast('Brak zapisanego szkicu'); return; }
+  const d = JSON.parse(raw);
+  // Wypełnij formularz
+  const set = (id, val) => { const el = document.getElementById(id); if(el && val) el.value = val; };
+  set('typInstalacji', d.typ);
+  set('rodzajPrzegladu', d.rodzaj);
+  set('obiekt', d.obiekt);
+  set('dataPrzegladu', d.data);
+  set('serwisant', d.serwisant);
+  set('modelCentrali', d.modelCentrali);
+  set('iloscCentral', d.iloscCentral);
+  set('lokalizacjaCentral', d.lokalizacjaCentral);
+  set('usterki', d.usterki);
+  set('zalecenia', d.zalecenia);
+  set('nieprawidlowosci', d.nieprawidlowosci);
+  set('zalecenieNieprawidl', d.zalecenieNieprawidl);
+  set('adnotacjeBiuro', d.adnotacjeBiuro);
+  set('infoKolejnySerwis', d.infoKolejnySerwis);
+  set('wynikPrzegladu', d.wynik);
+  // Odśwież checklist i zaznacz zapisane wartości
+  updateChecklist();
+  if (d.checklist) {
+    Object.entries(d.checklist).forEach(([id, val]) => {
+      if (val) setSt(id, val);
+    });
+  }
+  // Zdjęcia
+  if (d.photos && d.photos.length) {
+    photos = d.photos.map(src => ({data:src}));
+    renderPhotos();
+  }
+  toast('📂 Szkic wczytany!');
+  showScreen('nowy');
 }
 
 async function zapiszIPrzeslij() {
