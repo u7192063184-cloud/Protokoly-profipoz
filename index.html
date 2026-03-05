@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Profi-Poż">
+<meta name="theme-color" content="#e8360a">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<title>Profi-Poż | Protokoły</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap');
+:root{
+  --red:#e8360a;--red2:#ff5533;--dark:#0f1117;--surface:#181c26;--surface2:#1e2332;
+  --border:#2c3347;--text:#eef0f5;--muted:#7a8499;--green:#2ecc71;--yellow:#f1c40f;--orange:#f39c12;
+  --radius:10px;--safe-top:env(safe-area-inset-top);--safe-bot:env(safe-area-inset-bottom);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif;background:var(--dark);color:var(--text);}
+
+/* APP SHELL */
+.app{display:flex;flex-direction:column;height:100%;height:100dvh;}
+
+/* HEADER */
+.topbar{
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  padding:calc(var(--safe-top) + 10px) 16px 10px;
+  display:flex;align-items:center;gap:12px;
+  flex-shrink:0;
+}
+.logo-img{height:36px;object-fit:contain;}
+.topbar-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;letter-spacing:.5px;}
+.topbar-sub{font-size:11px;color:var(--muted);margin-top:1px;}
+.sync-btn{
+  margin-left:auto;
+  background:rgba(232,54,10,.15);
+  border:1px solid rgba(232,54,10,.4);
+  color:var(--red2);
+  border-radius:8px;
+  padding:7px 12px;
+  font-size:12px;font-weight:600;
+  cursor:pointer;font-family:'Barlow',sans-serif;
+}
+
+/* CONTENT */
+.content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--safe-bot) + 80px);}
+
+/* BOTTOM NAV */
+.bottomnav{
+  position:fixed;bottom:0;left:0;right:0;
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  display:grid;grid-template-columns:repeat(4,1fr);
+  padding-bottom:calc(var(--safe-bot));
+  flex-shrink:0;z-index:100;
+}
+.nav-btn{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:10px 4px 8px;cursor:pointer;border:none;background:transparent;
+  color:var(--muted);font-family:'Barlow',sans-serif;font-size:10px;font-weight:600;
+  letter-spacing:.3px;text-transform:uppercase;transition:color .15s;position:relative;
+}
+.nav-btn.active{color:var(--red2);}
+.nav-btn .icon{font-size:22px;line-height:1;}
+.nav-badge{
+  position:absolute;top:6px;right:calc(50% - 14px);
+  background:var(--red);color:#fff;
+  border-radius:10px;font-size:9px;font-weight:700;
+  padding:1px 5px;min-width:16px;text-align:center;
+}
+
+/* SECTIONS */
+.screen{display:none;padding:16px;}
+.screen.active{display:block;}
+
+/* PAGE TITLE */
+.page-hd{margin-bottom:16px;}
+.page-hd h1{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;letter-spacing:.5px;}
+.page-hd p{font-size:12px;color:var(--muted);margin-top:3px;}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:14px;}
+.card-hd{
+  font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;
+  text-transform:uppercase;letter-spacing:1.5px;color:var(--red2);
+  margin-bottom:14px;display:flex;align-items:center;gap:8px;
+}
+
+/* FIELDS */
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.field:last-child{margin-bottom:0;}
+.field label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);}
+.field input,.field select,.field textarea{
+  background:var(--dark);border:1px solid var(--border);border-radius:8px;
+  color:var(--text);font-family:'Barlow',sans-serif;font-size:15px;
+  padding:11px 13px;outline:none;width:100%;
+  -webkit-appearance:none;appearance:none;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--red);}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%237a8499' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
+.field select option{background:var(--surface);}
+.field textarea{min-height:80px;resize:none;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+/* CHECKLIST */
+.chk-item{
+  background:var(--dark);border:1px solid var(--border);border-radius:8px;
+  padding:12px 13px;margin-bottom:8px;
+}
+.chk-item.ok{border-color:#2ecc71;background:rgba(46,204,113,.05);}
+.chk-item.fail{border-color:#e74c3c;background:rgba(231,76,60,.05);}
+.chk-item.na{border-color:var(--border);opacity:.55;}
+.chk-top{display:flex;align-items:flex-start;gap:10px;}
+.chk-text{flex:1;}
+.chk-label{font-size:14px;font-weight:600;line-height:1.3;}
+.chk-note{font-size:11px;color:var(--muted);margin-top:3px;}
+.chk-btns{display:flex;flex-direction:column;gap:5px;flex-shrink:0;}
+.sbtn{
+  padding:5px 10px;border-radius:6px;font-size:11px;font-weight:700;
+  cursor:pointer;border:1px solid;background:transparent;font-family:'Barlow',sans-serif;
+  white-space:nowrap;
+}
+.sbtn-ok{color:#2ecc71;border-color:#2ecc71;}
+.sbtn-ok.active{background:#2ecc71;color:#000;}
+.sbtn-fail{color:#e74c3c;border-color:#e74c3c;}
+.sbtn-fail.active{background:#e74c3c;color:#fff;}
+.sbtn-na{color:var(--muted);border-color:var(--border);}
+.sbtn-na.active{background:var(--border);color:var(--text);}
+
+/* PROGRESS */
+.prog-bar{height:5px;background:var(--border);border-radius:5px;overflow:hidden;margin-top:14px;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--red2));border-radius:5px;transition:width .3s;}
+.prog-txt{font-size:11px;color:var(--muted);margin-top:6px;}
+
+/* BUTTONS */
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:14px;border-radius:var(--radius);
+  font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;
+  letter-spacing:.5px;cursor:pointer;border:none;margin-bottom:10px;
+  -webkit-appearance:none;
+}
+.btn:last-child{margin-bottom:0;}
+.btn-red{background:var(--red);color:#fff;}
+.btn-red:active{background:var(--red2);}
+.btn-green{background:#27ae60;color:#fff;}
+.btn-ghost{background:var(--surface2);color:var(--text);border:1px solid var(--border);}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.stat-c{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;}
+.stat-v{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;line-height:1;}
+.stat-l{font-size:11px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.5px;}
+
+/* TABLE */
+.proto-list{display:flex;flex-direction:column;gap:8px;}
+.proto-card{
+  background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:13px 14px;cursor:pointer;
+}
+.proto-card:active{background:var(--border);}
+.proto-top{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.proto-nr{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--muted);}
+.type-badge{padding:3px 8px;border-radius:4px;font-size:11px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:.5px;}
+.tb-ssp{background:rgba(232,54,10,.15);color:var(--red2);}
+.tb-dso{background:rgba(243,156,18,.15);color:var(--orange);}
+.tb-psp{background:rgba(241,196,15,.15);color:var(--yellow);}
+.tb-dsp{background:rgba(46,204,113,.15);color:var(--green);}
+.tb-sug{background:rgba(52,152,219,.15);color:#3498db;}
+.tb-inne{background:rgba(122,132,153,.15);color:var(--muted);}
+.tb-odd_el,.tb-odd_pn,.tb-odd_gr,.tb-odd_me{background:rgba(100,180,255,.15);color:#64b4ff;}
+.result-ok{color:var(--green);font-weight:700;}
+.result-warn{color:var(--yellow);font-weight:700;}
+.result-fail{color:#e74c3c;font-weight:700;}
+.proto-obj{font-size:15px;font-weight:600;}
+.proto-meta{display:flex;gap:12px;font-size:12px;color:var(--muted);margin-top:4px;}
+.proto-result{margin-top:6px;font-size:13px;}
+
+/* EMPTY */
+.empty{text-align:center;padding:60px 20px;color:var(--muted);}
+.empty .emoji{font-size:52px;margin-bottom:12px;}
+.empty p{font-size:14px;line-height:1.6;}
+
+/* TOAST */
+#toast{
+  position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--surface);border:1px solid var(--green);color:var(--text);
+  padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;
+  opacity:0;transition:all .25s;z-index:999;white-space:nowrap;
+  box-shadow:0 8px 32px rgba(0,0,0,.4);
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+#toast.err{border-color:#e74c3c;}
+:root{--accent:#64b4ff;}
+.adm-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--dark);border:1px solid var(--border);border-radius:8px;margin-bottom:6px;}
+.adm-item-text{flex:1;font-size:13px;font-weight:600;}
+.adm-item-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+.adm-btn{background:none;border:none;cursor:pointer;font-size:16px;padding:4px 6px;border-radius:6px;color:var(--muted);}
+.adm-btn:active{background:var(--border);}
+.adm-drag{cursor:grab;font-size:18px;color:var(--border);}
+.pin-btn{background:var(--surface2);border:1px solid var(--border);border-radius:12px;
+  color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;
+  padding:16px 10px;cursor:pointer;transition:background .12s;}
+.pin-btn:active{background:var(--red);border-color:var(--red);}
+
+/* ── Panel ── */
+.pf-btn{background:var(--surface2);border:1px solid var(--border);border-radius:20px;
+  color:var(--muted);font-family:'Barlow',sans-serif;font-size:12px;font-weight:600;
+  padding:6px 14px;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0;}
+.pf-btn.active{background:var(--red);border-color:var(--red);color:#fff;}
+.pf-sm{font-size:11px;padding:5px 10px;}
+.obj-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;
+  padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:background .15s;}
+.obj-card:active{background:var(--border);}
+.obj-name{font-size:15px;font-weight:700;margin-bottom:6px;}
+.obj-meta{display:flex;gap:12px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+.obj-last{display:flex;align-items:center;justify-content:space-between;margin-top:10px;
+  padding-top:10px;border-top:1px solid var(--border)}
+.panel-proto-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;
+  padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:background .15s;}
+.panel-proto-card:active{background:var(--border);}
+.panel-back{display:flex;align-items:center;gap:8px;padding:0 16px 12px;
+  font-size:14px;font-weight:700;color:var(--red2);cursor:pointer}
+.stat-box{background:var(--surface2);border:1px solid var(--border);border-radius:10px;
+  padding:10px 8px;text-align:center;}
+.stat-box-v{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;}
+.stat-box-l{font-size:10px;color:var(--muted);margin-top:2px;}
+.adm-typ-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--dark);border:1px solid var(--border);border-radius:8px;margin-bottom:6px;}
+.adm-typ-key{font-family:"JetBrains Mono",monospace;font-size:11px;background:rgba(232,54,10,.15);color:var(--red2);padding:3px 8px;border-radius:4px;flex-shrink:0;}
+.adm-typ-label{flex:1;font-size:13px;font-weight:600;}
+
+/* INSTALL BANNER */
+#installBanner{
+  display:none;background:linear-gradient(135deg,var(--red),#c0280a);
+  padding:12px 16px;text-align:center;cursor:pointer;flex-shrink:0;
+}
+#installBanner p{font-size:13px;font-weight:600;}
+#installBanner span{font-size:11px;opacity:.8;}
+
+/* MODAL */
+.modal-overlay{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;
+  align-items:flex-end;
+}
+.modal-overlay.open{display:flex;}
+.modal{
+  background:var(--surface);border-radius:16px 16px 0 0;
+  border:1px solid var(--border);width:100%;max-height:85vh;
+  overflow-y:auto;padding:20px 16px calc(var(--safe-bot) + 20px);
+}
+.modal-hd{
+  font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;
+  margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;
+}
+.close-btn{background:var(--surface2);border:none;color:var(--text);border-radius:8px;padding:6px 12px;font-size:18px;cursor:pointer;}
+
+/* SERVER SCREEN */
+.info-box{background:var(--dark);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-top:12px;}
+.info-box code{font-size:11px;color:var(--muted);line-height:1.8;white-space:pre-wrap;display:block;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- INSTALL BANNER -->
+  <div id="installBanner" onclick="installApp()">
+    <p>📲 Zainstaluj aplikację na telefonie</p>
+    <span>Dotknij aby dodać do ekranu głównego</span>
+  </div>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <img class="logo-img" src="data:image/png;base64,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" alt="Profi-Poż">
+    <div>
+      <div class="topbar-title">Protokoły</div>
+      <div class="topbar-sub">SSP · DSO · PSP · SUG · Oddymianie</div>
+    </div>
+    <button class="sync-btn" onclick="exportAllToExcel()">📊 Excel</button>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- NOWY PROTOKÓŁ -->
+    <div class="screen active" id="s-nowy">
+      <div class="page-hd">
+        <h1>📋 Nowy protokół</h1>
+        <p>Wypełnij formularz przeglądu instalacji</p>
+      </div>
+
+      <div class="card">
+        <div class="card-hd">⚡ Dane podstawowe</div>
+        <div class="field">
+          <label>Typ instalacji</label>
+          <select id="typInstalacji" onchange="updateChecklist()">
+            <option value="SSP">SSP – System Sygnalizacji Pożarowej</option>
+            <option value="DSO">DSO – Dźwiękowy System Ostrzegawczy</option>
+            <option value="SO_EL">SO – Oddymianie elektryczne</option>
+            <option value="SO_PN">SO – Oddymianie pneumatyczne</option>
+            <option value="PSP">PSP – System Powiadamiania Pożarowego</option>
+            <option value="DSP">DSP – Detekcja i Sygnalizacja Pożaru</option>
+            <option value="SUG">SUG – Stałe Urządzenia Gaśnicze</option>
+            <option value="ODD_EL">Oddymianie elektryczne (uproszczony)</option>
+            <option value="ODD_PN">Oddymianie pneumatyczne (uproszczony)</option>
+            <option value="ODD_GR">Oddymianie grawitacyjne</option>
+            <option value="ODD_ME">Oddymianie mechaniczne</option>
+            <option value="Inne">Inne instalacje</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Rodzaj przeglądu</label>
+          <select id="rodzajPrzegladu" onchange="updateChecklist()">
+            <option value="kwartalny">Okresowy kwartalny</option>
+            <option value="polroczny">Okresowy półroczny</option>
+            <option value="roczny" selected>Okresowy roczny</option>
+            <option value="awaryjny">Awaryjny</option>
+            <option value="odbiorowy">Odbiorowy</option>
+            <option value="konserwacja">Konserwacja</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Data przeglądu</label>
+          <input type="date" id="dataPrzegladu">
+        </div>
+        <div class="field">
+          <label>Obiekt / Lokalizacja</label>
+          <input type="text" id="obiekt" placeholder="Nazwa i adres obiektu" autocomplete="off">
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label>Model centrali</label>
+            <input type="text" id="modelCentrali" placeholder="np. Satel Integra, Polon 4900" autocomplete="off">
+          </div>
+          <div class="field">
+            <label>Ilość central</label>
+            <select id="iloscCentral">
+              <option value="">–</option>
+              <option>1</option><option>2</option><option>3</option>
+              <option>4</option><option>5</option><option>6</option>
+              <option>7</option><option>8</option><option>9</option><option>10</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Lokalizacja central</label>
+          <input type="text" id="lokalizacjaCentral" placeholder="np. Piwnica, serwerownia, klatka schodowa" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hd">👤 Serwisant</div>
+        <div class="field">
+          <label>Imię i nazwisko</label>
+          <input type="text" id="serwisant" placeholder="Jan Kowalski" autocomplete="name">
+        </div>
+
+      </div>
+
+      <div class="card" id="cardChecklist">
+        <div class="card-hd">✅ Lista kontrolna</div>
+        <div id="checklistContainer"></div>
+        <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+        <div class="prog-txt" id="progTxt">Zaznacz punkty listy kontrolnej</div>
+      </div>
+
+      <div class="card">
+        <div class="card-hd">📝 Uwagi i wynik</div>
+        <div class="field">
+          <label>Stwierdzone usterki</label>
+          <textarea id="usterki" placeholder="Opisz stwierdzone usterki lub wpisz: Brak usterek"></textarea>
+        </div>
+        <div class="field">
+          <label>Zalecenia do uszkodzeń</label>
+          <textarea id="zalecenia" placeholder="Numeruj zalecenia: 1. Należy zamocować ROP do ściany..."></textarea>
+        </div>
+        <div class="field">
+          <label>Nieprawidłowości</label>
+          <textarea id="nieprawidlowosci" placeholder="Opisz stwierdzone nieprawidłowości..."></textarea>
+        </div>
+        <div class="field">
+          <label>Zalecenia do nieprawidłowości</label>
+          <textarea id="zalecenieNieprawidl" placeholder="Numeruj zalecenia: 1. Należy..."></textarea>
+        </div>
+        <div class="field">
+          <label>🏢 Adnotacje do biura</label>
+          <textarea id="adnotacjeBiuro" placeholder="Informacje wewnętrzne dla biura / Martyny..."></textarea>
+        </div>
+        <div class="field">
+          <label>🔧 Informacja do kolejnego serwisu</label>
+          <textarea id="infoKolejnySerwis" placeholder="Co sprawdzono, na co zwrócić szczególną uwagę przy kolejnej wizycie..."></textarea>
+        </div>
+        <div class="field">
+          <label>Wynik przeglądu</label>
+          <select id="wynikPrzegladu">
+            <option value="Sprawny">✅ Sprawny / spełnia wymogi dla których został wykonany</option>
+            <option value="Sprawny z uwagami">⚠️ Sprawny z uwagami / spełnia wymogi dla których został wykonany</option>
+            <option value="Nie w pełni sprawny">⛔ Nie w pełni sprawny / nie spełnia wymogów</option>
+            <option value="Niesprawny">❌ Niesprawny / nie spełnia wymogów dla których został wykonany</option>
+          </select>
+        </div>
+
+
+      </div>
+
+      <div class="card">
+        <div class="card-hd">📷 Zdjęcia</div>
+        <div class="field">
+          <label>Dodaj zdjęcia z wizyty</label>
+          <div id="photoPreview" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px"></div>
+          <label for="photoInput" style="display:flex;align-items:center;justify-content:center;gap:8px;
+            background:var(--surface2);border:2px dashed var(--border);border-radius:10px;
+            padding:18px;cursor:pointer;color:var(--muted);font-size:14px;transition:border-color .2s"
+            id="photoLabel">
+            <span style="font-size:24px">📷</span> Kliknij aby dodać zdjęcia
+          </label>
+          <input type="file" id="photoInput" accept="image/*" multiple
+            style="display:none" onchange="handlePhotos(this)">
+          <div style="font-size:11px;color:var(--muted);margin-top:6px;text-align:center">
+            Możesz dodać wiele zdjęć naraz
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:0 0 8px">
+        <button class="btn btn-red" onclick="zapiszProtokol()">💾 Zapisz protokół</button>
+        <button class="btn btn-green" onclick="zapiszIPrzeslij()">📤 Zapisz i wyślij na serwer</button>
+        <button class="btn btn-ghost" onclick="resetForm()">🔄 Wyczyść formularz</button>
+      </div>
+    </div>
+
+    <!-- HISTORIA -->
+    <div class="screen" id="s-historia">
+      <div class="page-hd">
+        <h1>🗂️ Historia</h1>
+        <p>Wszystkie zapisane protokoły</p>
+      </div>
+      <div class="stats-grid" style="display:none">
+        <div class="stat-c"><div class="stat-v" id="stTotal" style="color:var(--red2)">0</div><div class="stat-l">Protokołów</div></div>
+        <div class="stat-c"><div class="stat-v" id="stOk" style="color:var(--green)">0</div><div class="stat-l">Pozytywnych</div></div>
+        <div class="stat-c"><div class="stat-v" id="stWarn" style="color:var(--yellow)">0</div><div class="stat-l">Z uwagami</div></div>
+        <div class="stat-c"><div class="stat-v" id="stFail" style="color:#e74c3c">0</div><div class="stat-l">Negatywnych</div></div>
+      </div>
+      <button class="btn btn-red" onclick="exportAllToExcel()">📊 Eksportuj wszystkie do Excel</button>
+      <div id="protoList" class="proto-list"></div>
+      <div id="emptyList" class="empty" style="display:none">
+        <div class="emoji">📭</div>
+        <p>Brak protokołów.<br>Utwórz pierwszy w zakładce Nowy.</p>
+      </div>
+    </div>
+
+    <!-- SERWER -->
+    <div class="screen" id="s-serwer">
+      <div class="page-hd">
+        <h1>⚙️ Serwer</h1>
+        <p>Konfiguracja synchronizacji</p>
+      </div>
+      <div class="card">
+        <div class="card-hd">🌐 Ustawienia API</div>
+        <div class="field">
+          <label>URL serwera (endpoint POST)</label>
+          <input type="url" id="serverUrl" placeholder="https://twoj-serwer.pl/api/protokoly" inputmode="url">
+        </div>
+        <div class="field">
+          <label>Klucz API (opcjonalny)</label>
+          <input type="password" id="apiKey" placeholder="Bearer token lub klucz API">
+        </div>
+        <div class="field">
+          <label>Nazwa pliku Excel</label>
+          <input type="text" id="excelFileName" placeholder="protokoly.xlsx" value="protokoly_profipoz.xlsx">
+        </div>
+        <div style="display:flex;gap:10px;margin-top:4px;">
+          <button class="btn btn-red" style="margin:0;flex:1" onclick="saveServerConfig()">💾 Zapisz</button>
+          <button class="btn btn-ghost" style="margin:0;flex:1" onclick="testConnection()">🔌 Test</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd">📋 Format danych JSON</div>
+        <div class="info-box">
+          <code>POST {endpoint}
+Content-Type: application/json
+
+{
+  "nr_protokolu": "SSP/2024/001",
+  "typ": "SSP",
+  "rodzaj": "Roczny",
+  "obiekt": "Centrum XYZ ul. ...",
+  "data": "2024-01-15",
+  "serwisant": "Jan Kowalski",
+  "firma": "Profi-Poż",
+  "wynik": "Pozytywny",
+  "usterki": "Brak usterek",
+  "zalecenia": "...",
+  "checklist": { ... },
+  "data_nastepna": "2025-01-15"
+}</code>
+        </div>
+      </div>
+    </div>
+
+    <!-- O APLIKACJI -->
+    <div class="screen" id="s-info">
+      <div class="page-hd">
+        <h1>ℹ️ O aplikacji</h1>
+      </div>
+      <div class="card" style="text-align:center;padding:24px 16px;">
+        <img src="data:image/png;base64,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" style="height:50px;object-fit:contain;margin-bottom:16px;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;margin-bottom:6px;">Profi-Poż</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">Labocha Marek · Profi-Poż</div>
+        <div style="font-size:14px;line-height:1.7;color:var(--muted);text-align:left;">
+          Aplikacja do tworzenia protokołów z przeglądów instalacji przeciwpożarowych:<br><br>
+          🔴 SSP – System Sygnalizacji Pożarowej<br>
+          🔊 DSO – Dźwiękowy System Ostrzegawczy<br>
+          📡 PSP – System Powiadamiania Pożarowego<br>
+          🌡️ DSP – Detekcja i Sygnalizacja Pożaru<br>
+          🧯 SUG – Stałe Urządzenia Gaśnicze<br>
+          🔲 Oddymianie elektryczne<br>
+          💨 Oddymianie pneumatyczne<br>
+          🌬️ Oddymianie grawitacyjne<br>
+          ⚙️ Oddymianie mechaniczne<br><br>
+          Protokoły zapisywane lokalnie na urządzeniu i eksportowane do Excel (.xlsx). Opcjonalna synchronizacja z serwerem przez API REST.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd">📱 Instalacja PWA</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.8;">
+          <b style="color:var(--text);">Android (Chrome):</b><br>
+          Menu ⋮ → "Dodaj do ekranu głównego"<br><br>
+          <b style="color:var(--text);">iPhone (Safari):</b><br>
+          Przycisk Udostępnij → "Dodaj do ekranu głównego"<br><br>
+          <b style="color:var(--text);">Offline:</b><br>
+          Po zainstalowaniu działa bez internetu ✓
+        </div>
+      </div>
+      <button class="btn btn-red" onclick="clearHistory()">🗑️ Wyczyść całą historię</button>
+    </div>
+
+
+    <!-- ADMIN -->
+    <div class="screen" id="s-admin">
+      <div class="page-hd">
+        <h1>🛠️ Panel Admin</h1>
+        <p>Edytuj typy instalacji i listy kontrolne</p>
+      </div>
+
+      <!-- TYPY INSTALACJI -->
+      <div class="card">
+        <div class="card-hd">⚡ Typy instalacji</div>
+        <div id="adminTypyList" class="checklist"></div>
+        <div style="display:flex;gap:10px;margin-top:14px">
+          <input type="text" id="newTypKey" placeholder="Klucz np. SUG2" style="flex:1;background:var(--dark);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Barlow',sans-serif;font-size:14px;padding:10px 13px;outline:none;">
+          <input type="text" id="newTypLabel" placeholder="Nazwa np. SUG Gazowe" style="flex:2;background:var(--dark);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Barlow',sans-serif;font-size:14px;padding:10px 13px;outline:none;">
+        </div>
+        <button class="btn btn-red" style="margin-top:10px" onclick="adminDodajTyp()">➕ Dodaj typ instalacji</button>
+      </div>
+
+      <!-- LISTA KONTROLNA EDYTOR -->
+      <div class="card">
+        <div class="card-hd">✅ Edytor listy kontrolnej</div>
+        <div class="field">
+          <label>Wybierz typ instalacji do edycji</label>
+          <select id="adminTypSelect" onchange="adminRenderChecklist()"></select>
+        </div>
+        <div id="adminChkList" style="margin-top:4px"></div>
+        <div style="margin-top:14px">
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Dodaj nowy punkt</div>
+          <input type="text" id="newChkLabel" placeholder="Nazwa punktu np. Centrala SSP"
+            style="width:100%;background:var(--dark);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Barlow',sans-serif;font-size:14px;padding:10px 13px;outline:none;margin-bottom:8px;">
+          <input type="text" id="newChkNote" placeholder="Opis / uwaga (opcjonalnie)"
+            style="width:100%;background:var(--dark);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Barlow',sans-serif;font-size:14px;padding:10px 13px;outline:none;margin-bottom:8px;">
+          <button class="btn btn-red" onclick="adminDodajPunkt()">➕ Dodaj punkt</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hd">⚠️ Reset do ustawień domyślnych</div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.6">Przywróci oryginalne listy kontrolne i typy instalacji. Twoje protokoły z historii NIE zostaną usunięte.</p>
+        <button class="btn btn-ghost" style="color:#e74c3c;border-color:#e74c3c" onclick="adminReset()">🔄 Przywróć domyślne</button>
+      </div>
+    </div>
+
+
+    <!-- PANEL PRZEGLĄDÓW -->
+    <div class="screen" id="s-panel">
+
+      <!-- Nagłówek + wyszukiwarka -->
+      <div style="padding:16px 16px 0">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;letter-spacing:.5px;margin-bottom:12px">
+          📊 Panel przeglądów
+        </div>
+
+        <!-- Szukaj po obiekcie -->
+        <div style="position:relative;margin-bottom:10px">
+          <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none">🔍</span>
+          <input type="text" id="panelSearch" placeholder="Szukaj obiektu..."
+            oninput="panelRender()"
+            style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;
+                   color:var(--text);font-family:'Barlow',sans-serif;font-size:15px;
+                   padding:11px 12px 11px 38px;outline:none;box-sizing:border-box">
+        </div>
+
+        <!-- Filtry -->
+        <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none">
+          <button class="pf-btn active" id="pf-all"   onclick="panelSetTyp('')">Wszystkie</button>
+          <button class="pf-btn" id="pf-SSP"    onclick="panelSetTyp('SSP')">SSP</button>
+          <button class="pf-btn" id="pf-DSO"    onclick="panelSetTyp('DSO')">DSO</button>
+          <button class="pf-btn" id="pf-SO_EL"  onclick="panelSetTyp('SO_EL')">SO El.</button>
+          <button class="pf-btn" id="pf-SO_PN"  onclick="panelSetTyp('SO_PN')">SO Pn.</button>
+          <button class="pf-btn" id="pf-PSP"    onclick="panelSetTyp('PSP')">PSP</button>
+          <button class="pf-btn" id="pf-SUG"    onclick="panelSetTyp('SUG')">SUG</button>
+          <button class="pf-btn" id="pf-Inne"   onclick="panelSetTyp('Inne')">Inne</button>
+        </div>
+
+        <!-- Filtr wynik -->
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <button class="pf-btn pf-sm active" id="pw-all"     onclick="panelSetWynik('')">Wszystkie</button>
+          <button class="pf-btn pf-sm" id="pw-ok"      onclick="panelSetWynik('Sprawny')">✅ Sprawny</button>
+          <button class="pf-btn pf-sm" id="pw-uwagi"   onclick="panelSetWynik('Sprawny z uwagami')">⚠️ Z uwagami</button>
+          <button class="pf-btn pf-sm" id="pw-zly"     onclick="panelSetWynik('Niesprawny')">❌ Niesprawny</button>
+        </div>
+      </div>
+
+      <!-- Statystyki globalne -->
+      <div id="panelStats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 16px 12px"></div>
+
+      <!-- Widok: lista obiektów lub lista protokołów -->
+      <div id="panelObiektView" style="padding:0 16px 100px"></div>
+      <div id="panelProtoView"  style="padding:0 16px 100px;display:none"></div>
+
+    </div>
+  </div><!-- /content -->
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottomnav" style="grid-template-columns:repeat(6,1fr)">
+    <button class="nav-btn active" id="nb-nowy" onclick="showScreen('nowy')">
+      <span class="icon">📋</span>Nowy
+    </button>
+    <button class="nav-btn" id="nb-historia" onclick="showScreen('historia')">
+      <span class="icon">🗂️</span>Historia
+      <span class="nav-badge" id="navBadge" style="display:none">0</span>
+    </button>
+    <button class="nav-btn" id="nb-panel" onclick="showScreen('panel')">
+      <span class="icon">📊</span>Panel
+    </button>
+    <button class="nav-btn" id="nb-admin" onclick="adminPinCheck()">
+      <span class="icon">🛠️</span>Admin
+    </button>
+    <button class="nav-btn" id="nb-serwer" onclick="serwerPinCheck()">
+      <span class="icon">⚙️</span>Serwer
+    </button>
+    <button class="nav-btn" id="nb-info" onclick="showScreen('info')">
+      <span class="icon">ℹ️</span>Info
+    </button>
+  </nav>
+
+</div><!-- /app -->
+
+<!-- MODAL SZCZEGÓŁY -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal">
+    <div class="modal-hd">
+      <span>Protokół</span>
+      <button class="close-btn" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<!-- MODAL LINK DO PODGLĄDU -->
+<div class="modal-overlay" id="linkModal">
+  <div class="modal" style="padding-bottom:28px">
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-size:40px;margin-bottom:8px">🎉</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800">Protokół zapisany!</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px" id="linkModalNr"></div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">
+      🔗 Link do podglądu na Google Drive
+    </div>
+    <input id="linkModalUrl" type="url" readonly
+      style="width:100%;background:var(--dark);border:1px solid var(--border);border-radius:8px;
+             color:var(--accent,#64b4ff);font-size:12px;padding:10px 12px;font-family:monospace;
+             outline:none;margin-bottom:12px;overflow:hidden;text-overflow:ellipsis;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+      <button class="btn btn-red" style="margin:0" onclick="copyLink()">📋 Kopiuj link</button>
+      <button class="btn btn-ghost" style="margin:0" onclick="openLink()">🌐 Otwórz</button>
+    </div>
+    <div style="font-size:11px;color:var(--muted);text-align:center;line-height:1.6">
+      Wyślij ten link klientowi lub współpracownikom.<br>Każdy z linkiem może przeglądać wszystkie protokoły.
+    </div>
+    <button class="btn btn-ghost" style="margin-top:12px" onclick="closeLinkModal()">✕ Zamknij</button>
+  </div>
+</div>
+
+<script>
+// ===================== DATA =====================
+const SK = 'profipoz_v1';
+let protokoly = JSON.parse(localStorage.getItem(SK) || '[]');
+
+
+function panelGetFiltered() {
+  var q = ((document.getElementById('panelSearch')||{}).value||'').toLowerCase().trim();
+  return protokoly.slice().reverse().filter(function(p) {
+    if (_panelTyp && p.typ !== _panelTyp) return false;
+    if (_panelWynik === 'uwagi' && !(p.wynik||'').toLowerCase().includes('uwag')) return false;
+    if (_panelWynik && _panelWynik !== 'uwagi' && !(p.wynik||'').startsWith(_panelWynik)) return false;
+    if (q && !(p.obiekt||'').toLowerCase().includes(q)) return false;
+    return true;
+  });
+}
+
+function panelOpenObiekt(nazwa) {
+  _panelObiekt = nazwa;
+  panelRenderProtos(nazwa);
+}
+
+function panelRenderProtos(nazwa) {
+  document.getElementById('panelObiektView').style.display = 'none';
+  var el = document.getElementById('panelProtoView');
+  el.style.display = '';
+  var protos = panelGetFiltered().filter(function(p){ return (p.obiekt||'Brak nazwy') === nazwa; });
+  var sprawne = protos.filter(function(p){return (p.wynik||'').startsWith('Sprawny')&&!(p.wynik||'').includes('uwag');}).length;
+  var uwagi   = protos.filter(function(p){return (p.wynik||'').includes('uwag');}).length;
+  var zle     = protos.filter(function(p){var w=p.wynik||'';return w.startsWith('Nie')||w==='Niesprawny';}).length;
+  var typy    = protos.map(function(p){return p.typ;}).filter(function(v,i,a){return a.indexOf(v)===i;}).join(' / ');
+
+  var html = '<div onclick="panelBackToList()" style="display:flex;align-items:center;gap:6px;padding-bottom:12px;color:var(--red2);font-size:14px;font-weight:700;cursor:pointer">&#8592; Powrót do listy</div>';
+  html += '<div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px">';
+  html += '<div style="font-size:17px;font-weight:800;margin-bottom:6px">'+nazwa+'</div>';
+  html += '<div style="font-size:12px;color:var(--muted);margin-bottom:12px">Systemy: '+(typy||'-')+'</div>';
+  html += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">';
+  html += '<div class="sbox"><div class="sbox-v" style="color:#4caf50">'+sprawne+'</div><div class="sbox-l">Sprawnych</div></div>';
+  html += '<div class="sbox"><div class="sbox-v" style="color:#ff9800">'+uwagi+'</div><div class="sbox-l">Z uwagami</div></div>';
+  html += '<div class="sbox"><div class="sbox-v" style="color:#e74c3c">'+zle+'</div><div class="sbox-l">Niesprawnych</div></div>';
+  html += '</div></div>';
+  html += '<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Historia protokołów ('+protos.length+')</div>';
+
+  protos.forEach(function(p) {
+    var kolor = (p.wynik||'').startsWith('Nie') ? '#e74c3c' : (p.wynik||'').includes('uwag') ? '#ff9800' : '#4caf50';
+    var ico   = (p.wynik||'').startsWith('Nie') ? '❌' : (p.wynik||'').includes('uwag') ? '⚠️' : '✅';
+    html += '<div class="pp-card" onclick="showDetail('+p.id+')">';
+    html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">';
+    html += '<span class="type-badge tb-'+(p.typ||'').toLowerCase()+'">'+p.typ+'</span>';
+    html += '<span style="font-size:12px;color:var(--muted);flex:1">'+(p.rodzaj||'')+'</span>';
+    html += '<span style="font-size:12px;color:var(--muted)">'+(p.data||'')+'</span>';
+    html += '</div>';
+    html += '<div style="font-size:13px;color:var(--muted);margin-bottom:6px">&#128100; '+(p.serwisant||'-')+'</div>';
+    if(p.usterki) html += '<div style="font-size:12px;color:#ff9800;margin-bottom:6px">&#9888; '+p.usterki.substring(0,80)+(p.usterki.length>80?'…':'')+'</div>';
+    html += '<div style="display:flex;align-items:center;justify-content:space-between">';
+    html += '<div style="font-size:13px;font-weight:700;color:'+kolor+'">'+ico+' '+(p.wynik||'-')+'</div>';
+    html += '<span style="font-size:11px;color:var(--red2)">Szczegóły →</span>';
+    html += '</div></div>';
+  });
+  el.innerHTML = html;
+}
+
+function panelBackToList() {
+  _panelObiekt = null;
+  panelRender();
+}
+
+
+
+
+
+const CL = {
+
+  SSP: [
+    {id:'ssp_steruje',   l:'Steruje urządzeniami',                                       n:'Czy centrala steruje urządzeniami wykonawczymi?',         scope:'all'},
+    {id:'ssp_nadzoruje', l:'Nadzoruje urządzenia',                                       n:'Czy centrala nadzoruje urządzenia?',                      scope:'all'},
+    {id:'ssp_uta',       l:'Czy jest UTA',                                               n:'Urządzenie transmisji alarmu – obecność',                 scope:'all'},
+    {id:'ssp_ksiazka',   l:'Czy jest książka eksploatacji',                              n:'Obecność i aktualność książki eksploatacji',              scope:'all'},
+
+    {id:'ssp_k1',  l:'Zapisy w książce eksploatacji / dzienniku pracy',                  n:'Sprawdzono wszystkie zapisy',                             scope:'k'},
+    {id:'ssp_k2',  l:'Zadziałanie ≥1 czujki i ROP w każdej strefie',                    n:'Co najmniej jedna czujka i ROP na strefę',                scope:'k'},
+    {id:'ssp_k3',  l:'Poprawność zadziałania scenariusza pożarowego',                    n:'Dla zadziałania czujki i ROP',                            scope:'k'},
+    {id:'ssp_k4',  l:'Sygnalizowanie uszkodzeń centrali',                                n:'Sprawdzono poprawność działania',                         scope:'k'},
+    {id:'ssp_k5',  l:'Uaktywnianie wszystkich funkcji wykonawczych',                     n:'Sprawdzono zdolność centrali',                            scope:'k'},
+    {id:'ssp_k6',  l:'Powiadamianie PSP / centrum powiadamiania',                        n:'Sprawdzono poprawność powiadamiania',                     scope:'k'},
+    {id:'ssp_k7',  l:'Test automatyczny / załączenie ręczne urządzenia',                 n:'Sprawdzono poprawność pracy',                             scope:'k'},
+    {id:'ssp_k8',  l:'Kontrola ROP – wyzwolenie ręczne',                                 n:'Kontrola wszystkich przycisków ROP',                      scope:'k'},
+    {id:'ssp_k9',  l:'Kontrola czujek dymu – gaz testowy',                               n:'Wyzwolenie gazem testowym',                               scope:'k'},
+    {id:'ssp_k10', l:'Test wszystkich pętli funkcją testowania w centrali',              n:'Wykonano test',                                           scope:'k'},
+    {id:'ssp_k11', l:'Inne kontrole zlecone przez wykonawcę / producenta',               n:'Przeprowadzono wszystkie inne próby',                     scope:'k'},
+    {id:'ssp_k12', l:'Zapis w książce eksploatacji',                                     n:'Dokonano wpisu',                                          scope:'k'},
+
+    {id:'ssp_p1',  l:'Test wskaźników optycznych i akustycznych centrali',               n:'Przeprowadzono test',                                     scope:'p'},
+    {id:'ssp_p2',  l:'Nadzorowanie uszkodzeń linii dozorowych i zasilania',              n:'Sprawdzono reakcję na uszkodzenia',                       scope:'p'},
+    {id:'ssp_p3',  l:'Rozpoznanie zmian budowlanych wpływających na rozmieszczenie czujek', n:'Dokonano rozpoznania',                                 scope:'p'},
+
+    {id:'ssp_r1',  l:'Połączenia kablowe i stan mechaniczny urządzeń centrali',          n:'Sprawdzono poprawność połączeń',                          scope:'r'},
+    {id:'ssp_r2',  l:'Badanie wszystkich baterii i akumulatorów',                        n:'Sprawdzono i przeprowadzono badanie',                     scope:'r'},
+    {id:'ssp_r3',  l:'Próby sprawności systemu na zasilaniu awaryjnym',                  n:'Przeprowadzono próby',                                    scope:'r'},
+  ],
+
+  DSO: [
+    {id:'dso_steruje',   l:'Steruje urządzeniami',                                       n:'Czy system steruje urządzeniami wykonawczymi?',           scope:'all'},
+    {id:'dso_nadzoruje', l:'Nadzoruje urządzenia',                                       n:'Czy system nadzoruje urządzenia?',                        scope:'all'},
+    {id:'dso_uta',       l:'Czy jest UTA',                                               n:'Urządzenie transmisji alarmu – obecność',                 scope:'all'},
+    {id:'dso_ksiazka',   l:'Czy jest książka eksploatacji',                              n:'Obecność i aktualność książki eksploatacji',              scope:'all'},
+
+    {id:'dso_k1',  l:'Zapisy w książce eksploatacji / dzienniku pracy',                  n:'Sprawdzono zapisy',                                       scope:'k'},
+    {id:'dso_k2',  l:'Wywiad z obsługą – uwagi co do pracy systemu',                     n:'Przeprowadzono wywiad',                                   scope:'k'},
+    {id:'dso_k3',  l:'Stan elementów szafy sterującej – uszkodzenia mechaniczne',        n:'Sprawdzono mechanicznie',                                 scope:'k'},
+    {id:'dso_k4',  l:'Sygnalizowanie stanu pracy na urządzeniach w szafie rack',         n:'Sprawdzono stan sygnalizacji',                            scope:'k'},
+    {id:'dso_k5',  l:'Poprawność połączeń DSO z SSP',                                    n:'Sprawdzono integrację',                                   scope:'k'},
+    {id:'dso_k6',  l:'Komunikat słowny słyszalny w deklarowanej strefie',                n:'Wszystkie strefy sprawdzone',                             scope:'k'},
+    {id:'dso_k7',  l:'Zdolność systemu do włączania elementów obocznych',                n:'Sprawdzono',                                             scope:'k'},
+    {id:'dso_k8',  l:'Wzmacniacz rezerwowy przy wyłączeniu podstawowego',                n:'Sprawdzono poprawność zadziałania',                       scope:'k'},
+    {id:'dso_k9',  l:'Sygnalizowanie uszkodzeń na liniach głośnikowych',                 n:'Sprawdzono poprawność',                                   scope:'k'},
+    {id:'dso_k10', l:'Poprawność działania 25% głośników w obiekcie',                   n:'Sprawdzono',                                             scope:'k'},
+    {id:'dso_k11', l:'Inne kontrole zlecone przez wykonawcę / producenta',               n:'Przeprowadzono wszystkie inne próby',                     scope:'k'},
+
+    {id:'dso_p1',  l:'Stan złączy, zamocowań i połączeń kablowych',                      n:'Sprawdzono',                                             scope:'p'},
+    {id:'dso_p2',  l:'Działanie wszystkich lampek i wyświetlaczy w szafie RACK',         n:'Sprawdzono',                                             scope:'p'},
+    {id:'dso_p3',  l:'Test akumulatorów',                                                n:'Wykonano test',                                           scope:'p'},
+    {id:'dso_p4',  l:'Stan połączeń układu zasilającego i połączenia ochronnego',        n:'Sprawdzono',                                             scope:'p'},
+    {id:'dso_p5',  l:'Komunikaty alarmowe w czasie < 30s od zaniku napięcia',            n:'Sprawdzono zdolność',                                     scope:'p'},
+    {id:'dso_p6',  l:'Praca na zasilaniu awaryjnym – pełny zakres funkcji',              n:'Odłączono zasilanie, sprawdzono wszystkie funkcje',       scope:'p'},
+    {id:'dso_p7',  l:'Poprawność komunikatów alarmowych',                                n:'Sprawdzono',                                             scope:'p'},
+    {id:'dso_p8',  l:'Sygnalizowanie uszkodzeń w czasie < 100s',                         n:'Sprawdzono zdolność',                                     scope:'p'},
+    {id:'dso_p9',  l:'Poprawność działania 50% głośników w obiekcie',                   n:'Sprawdzono',                                             scope:'p'},
+
+    {id:'dso_r1',  l:'Czyszczenie i odkurzenie szafy RACK oraz mikrofonu',               n:'Dokonano',                                               scope:'r'},
+    {id:'dso_r2',  l:'Pomiar pojemności akumulatorów',                                   n:'Wykonano pomiar',                                         scope:'r'},
+    {id:'dso_r3',  l:'Stan połączeń układu zasilającego i ochronnego',                   n:'Sprawdzono',                                             scope:'r'},
+    {id:'dso_r4',  l:'Wzmacniacz rezerwowy przy wyłączeniu podstawowego',                n:'Sprawdzono',                                             scope:'r'},
+    {id:'dso_r5',  l:'Zgodność impedancji linii głośnikowych z dokumentacją',            n:'Sprawdzono',                                             scope:'r'},
+    {id:'dso_r6',  l:'Poprawność działania 100% głośników w obiekcie',                  n:'Sprawdzono w ciągu roku',                                 scope:'r'},
+    {id:'dso_r7',  l:'Zmiany aranżacji mogące wpłynąć na działanie systemu',             n:'Sprawdzono czy nastąpiły',                               scope:'r'},
+    {id:'dso_r8',  l:'Pomiary zrozumiałości mowy i ciśnienia akustycznego',              n:'Przeprowadzono w reprezentatywnych miejscach',            scope:'r'},
+  ],
+
+  SO_EL: [
+    {id:'so_ksiazka',  l:'Czy posiada książkę serwisową',                                n:'Obecność i aktualność książki serwisowej',                scope:'all'},
+
+    {id:'so_e1',  l:'Zapisy w książce eksploatacji / dzienniku pracy systemu',           n:'Sprawdzono wszystkie zapisy',                             scope:'all'},
+    {id:'so_e2',  l:'Wywiad z obsługą – uwagi do pracy systemu',                         n:'Przeprowadzono wywiad',                                   scope:'all'},
+    {id:'so_e3',  l:'Optyczna kontrola uszkodzeń mechanicznych',                         n:'Dokonano kontroli',                                       scope:'all'},
+    {id:'so_e4',  l:'Optyczna kontrola połączeń kablowych',                              n:'Dokonano kontroli',                                       scope:'all'},
+    {id:'so_e5',  l:'Optyczna kontrola miejsca montażu klap – uszkodzenia mechaniczne',  n:'Dokonano kontroli',                                       scope:'all'},
+    {id:'so_e6',  l:'Otwarcie i zamknięcie klap z przycisku wentylacyjnego',             n:'Dokonano próby',                                          scope:'all'},
+    {id:'so_e7',  l:'Alarmowe otwarcie klap z czujek dymu',                              n:'Sprawdzono zadziałanie',                                  scope:'all'},
+    {id:'so_e8',  l:'Alarmowe otwarcie klap z RPO',                                      n:'Sprawdzono zadziałanie',                                  scope:'all'},
+    {id:'so_e9',  l:'Alarmowe uruchomienie klap oddymiających z centrali SSP',           n:'Dokonano próby',                                          scope:'all'},
+    {id:'so_e10', l:'Zdolność do zadziałania po zaniku zasilania podstawowego',          n:'Sprawdzono',                                             scope:'all'},
+    {id:'so_e11', l:'Stan uszczelek, siłowników oraz uchwytów po wyzwoleniu alarmowym',  n:'Sprawdzono',                                             scope:'all'},
+    {id:'so_e12', l:'Stan oraz przesmarowanie okuć',                                     n:'Sprawdzono i przesmarowano',                              scope:'all'},
+    {id:'so_e13', l:'Reakcja systemu na pojawiające się uszkodzenia',                    n:'Sprawdzono',                                             scope:'all'},
+    {id:'so_e14', l:'Stan akumulatorów zasilania rezerwowego',                           n:'Sprawdzono',                                             scope:'all'},
+    {id:'so_e15', l:'Wpis w książce eksploatacji systemu',                               n:'Dokonano wpisu',                                          scope:'all'},
+    {id:'so_e16', l:'Inne kontrole zlecone przez wykonawcę / dostawcę / producenta',     n:'Przeprowadzono',                                         scope:'all'},
+  ],
+
+  SO_PN: [
+    {id:'so_ksiazka',  l:'Czy posiada książkę serwisową',                                n:'Obecność i aktualność książki serwisowej',                scope:'all'},
+
+    {id:'so_p1',  l:'Zapisy w książce eksploatacji / dzienniku pracy systemu',           n:'Sprawdzono wszystkie zapisy',                             scope:'all'},
+    {id:'so_p2',  l:'Wywiad z obsługą – uwagi do pracy systemu',                         n:'Przeprowadzono wywiad',                                   scope:'all'},
+    {id:'so_p3',  l:'Optyczna kontrola uszkodzeń mechanicznych',                         n:'Dokonano kontroli',                                       scope:'all'},
+    {id:'so_p4',  l:'Optyczna kontrola miejsca montażu klap – uszkodzenia mechaniczne',  n:'Dokonano kontroli',                                       scope:'all'},
+    {id:'so_p5',  l:'Stan sekcyjnych urządzeń wyzwalających (iglice, napinacze, naboje CO₂)', n:'Sprawdzono',                                        scope:'all'},
+    {id:'so_p6',  l:'Uruchomienie klap oddymiających z central sekcyjnych',              n:'Dokonano próby',                                          scope:'all'},
+    {id:'so_p7',  l:'Stan uszczelek, siłowników oraz uchwytów po wyzwoleniu alarmowym',  n:'Sprawdzono',                                             scope:'all'},
+    {id:'so_p8',  l:'Stan oraz przesmarowanie okuć',                                     n:'Sprawdzono i przesmarowano',                              scope:'all'},
+    {id:'so_p9',  l:'Uruchomienie termobezpiecznika miejscowo w klapie',                 n:'Wykonano próbę',                                          scope:'all'},
+    {id:'so_p10', l:'Stan miejscowych urządzeń wyzwalających (iglice, napinacze, naboje CO₂)', n:'Sprawdzono',                                       scope:'all'},
+    {id:'so_p11', l:'Ważenie naboi CO₂',                                                n:'Wykonano ważenie',                                        scope:'all'},
+    {id:'so_p12', l:'Ręczne / automatyczne zamknięcie klap oddymiających',               n:'Wykonano',                                               scope:'all'},
+    {id:'so_p13', l:'Stan rezerwy naboi CO₂',                                           n:'Sprawdzono',                                             scope:'all'},
+    {id:'so_p14', l:'Próba szczelności układu pneumatycznego',                           n:'Dokonano próby',                                          scope:'all'},
+    {id:'so_p15', l:'Przywrócenie systemu do stanu dozorowania',                         n:'Wykonano reset systemu',                                  scope:'all'},
+    {id:'so_p16', l:'Wpis w książce eksploatacji systemu',                               n:'Dokonano wpisu',                                          scope:'all'},
+    {id:'so_p17', l:'Inne kontrole zlecone przez wykonawcę / dostawcę / producenta',     n:'Przeprowadzono',                                         scope:'all'},
+  ],
+
+  PSP: [
+    {id:'psp_transm',  l:'Stan urządzenia transmisji alarmu',                            n:'Stan, diody sygnalizacyjne',                              scope:'all'},
+    {id:'psp_linia',   l:'Linia telefoniczna / GSM',                                     n:'Test transmisji do centrum',                              scope:'all'},
+    {id:'psp_test',    l:'Test alarmu – wysłanie i potwierdzenie',                       n:'Wysłanie alarmu testowego',                               scope:'all'},
+    {id:'psp_zasil',   l:'Zasilanie i akumulator',                                       n:'Napięcie, pojemność akumulatora',                         scope:'all'},
+    {id:'psp_integr',  l:'Integracja z SSP',                                             n:'Wyzwalanie przez centralę SSP',                           scope:'all'},
+    {id:'psp_centrum', l:'Gotowość centrum monitoringu / odbiorczego',                   n:'Potwierdzenie gotowości centrum',                         scope:'all'},
+  ],
+
+  DSP: [
+    {id:'dsp_panel',    l:'Stan panelu sterującego',                                     n:'Stan, wyświetlacz, klawiatura',                           scope:'all'},
+    {id:'dsp_czujniki', l:'Czujniki detekcji (dym, gaz, temperatura)',                   n:'Wizualna kontrola, test',                                 scope:'all'},
+    {id:'dsp_alarmy',   l:'Alarmy i sygnalizacja',                                       n:'Test sygnalizacji alarmowej',                             scope:'all'},
+    {id:'dsp_logi',     l:'Zapis zdarzeń – weryfikacja logów',                           n:'Weryfikacja logów systemowych',                           scope:'all'},
+    {id:'dsp_zasil',    l:'Zasilanie i akumulatory awaryjne',                            n:'Zasilanie awaryjne, stan akumulatorów',                   scope:'all'},
+  ],
+
+  SUG: [
+    {id:'sug_zbiorn',  l:'Zbiornik / butle gazu – ciśnienie, masa, data ważności',      n:'Sprawdzono ciśnienie, masę, datę ważności',               scope:'all'},
+    {id:'sug_zawory',  l:'Zawory i dysze – stan techniczny, brak blokad',               n:'Sprawdzono stan i drożność',                              scope:'all'},
+    {id:'sug_sterow',  l:'Układ sterowania – centrala gaszenia, tryb auto/ręczny',      n:'Sprawdzono działanie centrali',                           scope:'all'},
+    {id:'sug_test',    l:'Test wyzwalania bez wypływu środka gaśniczego',               n:'Wykonano test',                                           scope:'all'},
+    {id:'sug_szczeln', l:'Szczelność strefy – uszczelnienia, klapy, drzwi',             n:'Sprawdzono szczelność',                                   scope:'all'},
+    {id:'sug_serwis',  l:'Historia serwisu – data ostatniego, termin następnego',       n:'Sprawdzono dokumentację serwisową',                       scope:'all'},
+  ],
+
+  ODD_EL: [
+    {id:'odd_central',  l:'Centrala oddymiania – stan, sygnalizacja błędów',             n:'Stan centrali, tryb pracy',                               scope:'all'},
+    {id:'odd_czujniki', l:'Czujniki dymu / ciepła wyzwalające',                          n:'Wizualna kontrola stanu czujników',                       scope:'all'},
+    {id:'odd_napedy',   l:'Napędy elektryczne klap – stan, mocowanie, przewody',         n:'Sprawdzono napędy',                                       scope:'all'},
+    {id:'odd_klapy',    l:'Klapy oddymiające – sprawność mechaniczna, szczelność',       n:'Sprawdzono klapy',                                        scope:'all'},
+    {id:'odd_test',     l:'Test otwarcia klap – automatyczny i ręczny',                  n:'Otwarcie wszystkich klap',                                scope:'all'},
+    {id:'odd_rop',      l:'Przyciski oddymiania (ROP) – dostępność, działanie',          n:'Sprawdzono przyciski',                                    scope:'all'},
+    {id:'odd_nawiew',   l:'Klapy / otwory nawiewne',                                     n:'Sprawność klap napowietrzających',                        scope:'all'},
+    {id:'odd_zasil',    l:'Zasilanie i akumulatory – podstawowe i rezerwowe',             n:'Sprawdzono stan',                                        scope:'all'},
+    {id:'odd_reset',    l:'Funkcja resetu centrali po alarmie',                          n:'Sprawdzono powrót do czuwania',                           scope:'all'},
+    {id:'odd_docs',     l:'Dokumentacja techniczna – protokoły, certyfikaty',            n:'Kompletność dokumentacji',                                scope:'all'},
+  ],
+
+  ODD_PN: [
+    {id:'oddpn_zbiornik', l:'Zbiornik spr. powietrza / CO₂ – ciśnienie, legalizacja',   n:'Sprawdzono ciśnienie i datę legalizacji',                 scope:'all'},
+    {id:'oddpn_zawory',   l:'Zawory pneumatyczne – stan, szczelność',                    n:'Sprawdzono zawory',                                       scope:'all'},
+    {id:'oddpn_silowniki',l:'Siłowniki pneumatyczne klap',                               n:'Sprawność siłowników, szczelność układu',                 scope:'all'},
+    {id:'oddpn_klapy',    l:'Klapy oddymiające – sprawność mechaniczna',                 n:'Sprawdzono klapy',                                        scope:'all'},
+    {id:'oddpn_test',     l:'Test otwarcia klap – automatyczny i ręczny',                n:'Otwarcie wszystkich klap',                                scope:'all'},
+    {id:'oddpn_rop',      l:'Przyciski wyzwalające – dostępność, działanie',             n:'Sprawdzono przyciski',                                    scope:'all'},
+    {id:'oddpn_nawiew',   l:'Klapy / otwory nawiewne',                                   n:'Sprawność klap napowietrzających',                        scope:'all'},
+    {id:'oddpn_przewody', l:'Przewody i instalacja pneumatyczna – szczelność',           n:'Brak uszkodzeń i nieszczelności',                         scope:'all'},
+    {id:'oddpn_zasil',    l:'Zasilanie układu sterowania',                               n:'Zasilanie podstawowe i rezerwowe',                        scope:'all'},
+    {id:'oddpn_docs',     l:'Dokumentacja techniczna – protokoły, certyfikaty',          n:'Kompletność dokumentacji',                                scope:'all'},
+  ],
+
+  ODD_GR: [
+    {id:'oddgr_klapy',    l:'Klapy oddymiające grawitacyjne – sprawność, uszczelki',     n:'Sprawdzono stan mechaniczny',                             scope:'all'},
+    {id:'oddgr_napedy',   l:'Napędy klap (el. / pn. / ręczne)',                          n:'Sprawność napędów, mocowanie',                            scope:'all'},
+    {id:'oddgr_test',     l:'Test otwarcia klap – automatyczny i ręczny',                n:'Otwarcie i zamknięcie klap',                              scope:'all'},
+    {id:'oddgr_przeplyw', l:'Swobodny przepływ powietrza – brak przeszkód',              n:'Sprawdzono drożność przepływu',                           scope:'all'},
+    {id:'oddgr_nawiew',   l:'Otwory / klapy nawiewne',                                   n:'Sprawność klap napowietrzających',                        scope:'all'},
+    {id:'oddgr_rop',      l:'Przyciski oddymiania – dostępność, oznakowanie, działanie', n:'Sprawdzono przyciski',                                    scope:'all'},
+    {id:'oddgr_wyzwal',   l:'Układ wyzwalania – SSP, ręczne, automatyczne',              n:'Sprawdzono wszystkie tryby',                              scope:'all'},
+    {id:'oddgr_zasil',    l:'Zasilanie układu sterowania',                               n:'Zasilanie podstawowe i rezerwowe',                        scope:'all'},
+    {id:'oddgr_docs',     l:'Dokumentacja techniczna',                                   n:'Protokoły, certyfikaty, deklaracje',                      scope:'all'},
+  ],
+
+  ODD_ME: [
+    {id:'oddme_went',    l:'Wentylator wyciągowy – stan, obroty, hałas, drgania',        n:'Sprawdzono stan wentylatora',                             scope:'all'},
+    {id:'oddme_klapy',   l:'Klapy odcinające – sprawność, szczelność w zamknięciu',      n:'Sprawdzono klapy',                                        scope:'all'},
+    {id:'oddme_nawiew',  l:'Klapy / otwory nawiewne',                                    n:'Sprawność klap napowietrzających',                        scope:'all'},
+    {id:'oddme_kanal',   l:'Kanały wentylacyjne – stan, szczelność, mocowanie',          n:'Sprawdzono kanały',                                       scope:'all'},
+    {id:'oddme_test',    l:'Test pracy wentylatora – automatyczny i ręczny',             n:'Uruchomienie i sprawdzenie',                              scope:'all'},
+    {id:'oddme_rop',     l:'Przyciski oddymiania – dostępność, oznakowanie, działanie',  n:'Sprawdzono przyciski',                                    scope:'all'},
+    {id:'oddme_ssp',     l:'Integracja z SSP – automatyczne uruchomienie',               n:'Sprawdzono wyzwalanie od SSP',                            scope:'all'},
+    {id:'oddme_zasil',   l:'Zasilanie i zabezpieczenia – podstawowe, rezerwowe',         n:'Sprawdzono zasilanie i bezpieczniki',                     scope:'all'},
+    {id:'oddme_reset',   l:'Reset i powrót do stanu czuwania',                           n:'Wyłączenie wentylatora po resecie alarmu',                scope:'all'},
+    {id:'oddme_docs',    l:'Dokumentacja techniczna',                                    n:'Protokoły, certyfikaty, deklaracje',                      scope:'all'},
+  ],
+
+  Inne: [
+    {id:'inne_wizual',   l:'Kontrola wizualna – ogólny stan techniczny',                 n:'Sprawdzono stan instalacji',                              scope:'all'},
+    {id:'inne_test',     l:'Test działania – funkcje podstawowe',                        n:'Sprawdzono podstawowe funkcje',                           scope:'all'},
+    {id:'inne_zasil',    l:'Zasilanie i zabezpieczenia',                                 n:'Sprawdzono zasilanie',                                    scope:'all'},
+    {id:'inne_docs',     l:'Dokumentacja – kompletność',                                 n:'Sprawdzono dokumentację',                                 scope:'all'},
+    {id:'inne_ocena',    l:'Ocena ogólna stanu technicznego',                            n:'Uwagi ogólne do instalacji',                              scope:'all'},
+  ],
+};
+
+let cs = {};
+
+// ===================== INIT =====================
+window.onload = () => {
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('dataPrzegladu').value = today;
+  loadServerConfig();
+  updateChecklist();
+  updateBadge();
+  initAdmin();
+  adminRenderTypes();
+
+  // Service Worker z auto-aktualizacją
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').then(reg => {
+      // Sprawdzaj aktualizacje co 60 minut
+      setInterval(() => reg.update(), 60 * 60 * 1000);
+      // Gdy nowa wersja gotowa — poinformuj użytkownika
+      reg.addEventListener('updatefound', () => {
+        const newSW = reg.installing;
+        newSW.addEventListener('statechange', () => {
+          if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
+            if (confirm('🔄 Dostępna nowa wersja aplikacji! Zaktualizować teraz?')) {
+              newSW.postMessage({ type: 'SKIP_WAITING' });
+              window.location.reload();
+            }
+          }
+        });
+      });
+    }).catch(()=>{});
+
+    // Przeładuj gdy SW przejmuje kontrolę
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!refreshing) { refreshing = true; window.location.reload(); }
+    });
+  }
+
+  // PWA install
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    window._installEvt = e;
+    document.getElementById('installBanner').style.display = 'block';
+  });
+};
+
+function installApp() {
+  if (window._installEvt) {
+    window._installEvt.prompt();
+    window._installEvt.userChoice.then(() => {
+      document.getElementById('installBanner').style.display = 'none';
+    });
+  }
+}
+
+function autoNr() {
+  const typ = document.getElementById('typInstalacji')?.value || 'SSP';
+  const y = new Date().getFullYear();
+  const n = String(protokoly.length + 1).padStart(3,'0');
+  return `${typ}/${y}/${n}`;
+}
+
+// ===================== SCREENS =====================
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});
+  var scr = document.getElementById('s-'+name);
+  var btn = document.getElementById('nb-'+name);
+  if(scr) scr.classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(name==='historia') renderHistory();
+  if(name==='panel'){_panelTyp='';_panelWynik='';_panelObiekt=null;panelRender();}
+  if(name==='admin'){adminRenderTypes();adminRefreshTypSelect();}
+}
+
+// ===================== CHECKLIST =====================
+function updateChecklist() {
+  const typ    = document.getElementById('typInstalacji').value;
+  const rodzaj = document.getElementById('rodzajPrzegladu').value;
+  const allItems = (getCL()[typ] || getCL()['Inne'] || CL[typ] || CL.Inne);
+
+  // Które zakresy pokazać dla danego rodzaju przeglądu
+  const scopeMap = {
+    kwartalny:   ['all','k'],
+    polroczny:   ['all','k','p'],
+    roczny:      ['all','k','p','r'],
+    awaryjny:    [],
+    odbiorowy:   ['all','serwis'],
+    konserwacja: ['all','serwis'],
+  };
+  const isAwaryjny = rodzaj === 'awaryjny';
+  const cardCl = document.getElementById('cardChecklist');
+  if (cardCl) cardCl.style.display = isAwaryjny ? 'none' : '';
+
+  if (isAwaryjny) {
+    cs = {};
+    document.getElementById('checklistContainer').innerHTML = '';
+    updProg();
+    return;
+  }
+
+  const allowed = scopeMap[rodzaj] || ['all','k','p','r','serwis'];
+  const items = allItems.filter(i => allowed.includes(i.scope || 'all'));
+
+  cs = {};
+  items.forEach(i => cs[i.id] = null);
+
+  // Nagłówki sekcji dla K/P/R
+  const sectionLabels = {
+    k: '📋 Kwartalny',
+    p: '📋 Półroczny',
+    r: '📋 Roczny',
+  };
+
+  let html = '';
+  let lastScope = null;
+
+  items.forEach(item => {
+    const sc = item.scope;
+    // Wstaw nagłówek sekcji przy zmianie zakresu (tylko dla K/P/R)
+    if (['k','p','r'].includes(sc) && sc !== lastScope) {
+      html += `<div style="margin:14px 0 8px;padding:7px 12px;background:var(--surface2);
+        border-left:3px solid var(--red);border-radius:0 6px 6px 0;
+        font-size:11px;font-weight:700;color:var(--red2);text-transform:uppercase;
+        letter-spacing:1px">${sectionLabels[sc] || sc}</div>`;
+      lastScope = sc;
+    }
+    html += `
+    <div class="chk-item" id="ci-${item.id}">
+      <div class="chk-top">
+        <div class="chk-text">
+          <div class="chk-label">${item.l}</div>
+          <div class="chk-note">${item.n || ''}</div>
+        </div>
+        <div class="chk-btns">
+          <button class="sbtn sbtn-ok"   id="ok-${item.id}" onclick="setSt('${item.id}','ok')">✓ OK</button>
+          <button class="sbtn sbtn-fail" id="fl-${item.id}" onclick="setSt('${item.id}','fail')">✗ BŁ</button>
+          <button class="sbtn sbtn-na"   id="na-${item.id}" onclick="setSt('${item.id}','na')">N/D</button>
+        </div>
+      </div>
+    </div>`;
+  });
+
+  document.getElementById('checklistContainer').innerHTML = html;
+  updProg();
+}
+
+
+function setSt(id, st) {
+  cs[id] = st;
+  document.getElementById('ci-'+id).className = 'chk-item ' + st;
+  document.getElementById('ok-'+id).classList.toggle('active', st==='ok');
+  document.getElementById('fl-'+id).classList.toggle('active', st==='fail');
+  document.getElementById('na-'+id).classList.toggle('active', st==='na');
+  updProg();
+}
+
+function updProg() {
+  const total = Object.keys(cs).length;
+  const done = Object.values(cs).filter(v=>v!==null).length;
+  const pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('progTxt').textContent = `${done}/${total} punktów (${pct}%)`;
+}
+
+// ===================== SAVE =====================
+function getForm() {
+  return {
+    id: Date.now(),
+    typ: document.getElementById('typInstalacji').value,
+    rodzaj: document.getElementById('rodzajPrzegladu').value,
+    obiekt: document.getElementById('obiekt').value,
+    modelCentrali: document.getElementById('modelCentrali').value,
+    iloscCentral: document.getElementById('iloscCentral').value,
+    lokalizacjaCentral: document.getElementById('lokalizacjaCentral').value,
+    data: document.getElementById('dataPrzegladu').value,
+    serwisant: document.getElementById('serwisant').value,
+    uprawnienia: (document.getElementById('uprawnienia')||{}).value||'',
+    checklist: {...cs},
+    usterki: document.getElementById('usterki').value,
+    zalecenia: document.getElementById('zalecenia').value,
+    nieprawidlowosci: document.getElementById('nieprawidlowosci').value,
+    zalecenieNieprawidl: document.getElementById('zalecenieNieprawidl').value,
+    adnotacjeBiuro: document.getElementById('adnotacjeBiuro').value,
+    infoKolejnySerwis: document.getElementById('infoKolejnySerwis').value,
+    photos: photos.map(p => p.data),
+    wynik: document.getElementById('wynikPrzegladu').value,
+    przedstawiciel: (document.getElementById('przedstawiciel')||{}).value||'',
+    firmaObiektu: (document.getElementById('firmaObiektu')||{}).value||'',
+    uprawnieniaPrzedst: (document.getElementById('uprawnieniaPrzedst')||{}).value||'',
+    ts: new Date().toISOString(),
+  };
+}
+
+function valid(d) {
+  if (!d.obiekt) { toast('⚠️ Podaj nazwę obiektu!',1); return false; }
+  if (!d.serwisant) { toast('⚠️ Podaj imię serwisanta!',1); return false; }
+  return true;
+}
+
+function zapiszProtokol() {
+  const d = getForm();
+  if (!valid(d)) return;
+  protokoly.push(d);
+  localStorage.setItem(SK, JSON.stringify(protokoly));
+  toast('✅ Protokół zapisany!');
+  updateBadge(); resetForm();
+}
+
+async function zapiszIPrzeslij() {
+  const d = getForm();
+  if (!valid(d)) return;
+
+  const url = localStorage.getItem('serverUrl');
+  if (!url) { toast('⚠️ Brak URL serwera. Skonfiguruj w zakładce Serwer.',1); return; }
+
+  toast('📤 Wysyłanie na Google Drive...');
+  try {
+    const r = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(d)});
+    const json = await r.json().catch(()=>({}));
+
+    d.viewUrl = json.viewUrl || null;
+    protokoly.push(d);
+    localStorage.setItem(SK, JSON.stringify(protokoly));
+    updateBadge(); resetForm();
+
+    if (json.viewUrl) {
+      showLinkModal(json.viewUrl, d.nr);
+    } else {
+      toast(r.ok ? '✅ Zapisano na Google Drive!' : `⚠️ Serwer: ${r.status}`, !r.ok);
+    }
+  } catch(e) {
+    // zapisz lokalnie mimo błędu
+    protokoly.push(d);
+    localStorage.setItem(SK, JSON.stringify(protokoly));
+    updateBadge(); resetForm();
+    toast('❌ Błąd połączenia. Zapisano lokalnie.', 1);
+  }
+}
+
+function showLinkModal(url, nr) {
+  document.getElementById('linkModalNr').textContent = nr || 'Protokół';
+  document.getElementById('linkModalUrl').value = url;
+  document.getElementById('linkModal').classList.add('open');
+}
+
+function copyLink() {
+  const inp = document.getElementById('linkModalUrl');
+  inp.select(); inp.setSelectionRange(0,9999);
+  navigator.clipboard.writeText(inp.value).then(()=>{
+    toast('📋 Link skopiowany!');
+  }).catch(()=>{
+    document.execCommand('copy');
+    toast('📋 Link skopiowany!');
+  });
+}
+
+function openLink() {
+  window.open(document.getElementById('linkModalUrl').value, '_blank');
+}
+
+function closeLinkModal() {
+  document.getElementById('linkModal').classList.remove('open');
+}
+
+function resetForm() {
+  document.getElementById('obiekt').value = '';
+  document.getElementById('modelCentrali').value = '';
+  document.getElementById('iloscCentral').value = '';
+  document.getElementById('lokalizacjaCentral').value = '';
+  document.getElementById('usterki').value = '';
+  document.getElementById('zalecenia').value = '';
+  document.getElementById('nieprawidlowosci').value = '';
+  document.getElementById('zalecenieNieprawidl').value = '';
+  document.getElementById('adnotacjeBiuro').value = '';
+  document.getElementById('infoKolejnySerwis').value = '';
+  resetPhotos();
+  // przedstawiciel removed
+  // firmaObiektu removed
+  // uprawnieniaPrzedst removed
+  document.getElementById('wynikPrzegladu').value = 'Pozytywny';
+  updateChecklist();
+}
+
+
+function wynikClass(w) {
+  w = w||'';
+  if (w.startsWith('Nie')||w==='Niesprawny') return 'result-fail';
+  if (w.toLowerCase().includes('uwag')) return 'result-warn';
+  return 'result-ok';
+}
+function wynikIco(w) {
+  w = w||'';
+  if (w.startsWith('Nie')||w==='Niesprawny') return '❌';
+  if (w.toLowerCase().includes('uwag')) return '⚠️';
+  return '✅';
+}
+function renderHistory() {
+  const list = document.getElementById('protoList');
+  const empty = document.getElementById('emptyList');
+  document.getElementById('stTotal').textContent = protokoly.length;
+  document.getElementById('stOk').textContent = protokoly.filter(p=>p.wynik==='Pozytywny').length;
+  document.getElementById('stWarn').textContent = protokoly.filter(p=>p.wynik==='Pozytywny z uwagami').length;
+  document.getElementById('stFail').textContent = protokoly.filter(p=>p.wynik==='Negatywny').length;
+
+  if (!protokoly.length) { list.innerHTML=''; empty.style.display=''; return; }
+  empty.style.display = 'none';
+
+  list.innerHTML = [...protokoly].reverse().map(p => `
+    <div class="proto-card" onclick="showDetail(${p.id})">
+      <div class="proto-top">
+        <span class="proto-nr">${p.nr||'-'}</span>
+        <span class="type-badge tb-${p.typ.toLowerCase()}">${p.typ}</span>
+        <span style="margin-left:auto;font-size:12px;color:var(--muted)">${p.data}</span>
+      </div>
+      <div class="proto-obj">${p.obiekt}</div>
+      <div class="proto-meta">
+        <span>${p.serwisant}</span>
+        <span>${p.rodzaj}</span>
+      </div>
+      <div class="proto-result ${wynikClass(p.wynik)}">
+        ${wynikIco(p.wynik)} ${p.wynik||'Brak'}
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateBadge() {
+  const b = document.getElementById('navBadge');
+  if (protokoly.length) { b.textContent = protokoly.length; b.style.display = ''; }
+  else b.style.display = 'none';
+}
+
+function clearHistory() {
+  if (!confirm('Usunąć WSZYSTKIE protokoły?')) return;
+  protokoly = [];
+  localStorage.setItem(SK, JSON.stringify(protokoly));
+  renderHistory(); updateBadge();
+  toast('🗑️ Historia wyczyszczona');
+}
+
+// ===================== MODAL DETAIL =====================
+function showDetail(id) {
+  const p = protokoly.find(x => x.id === id);
+  if (!p) return;
+  const typ = p.typ;
+  const allItems = getCL()[typ] || getCL().Inne || CL[typ] || CL.Inne;
+  // Odtwórz scope na podstawie rodzaju przeglądu zapisanego w protokole
+  const scopeMap2 = {
+    kwartalny:   ['all','k'],
+    polroczny:   ['all','k','p'],
+    roczny:      ['all','k','p','r'],
+    awaryjny:    [],
+    odbiorowy:   ['all','serwis'],
+    konserwacja: ['all','serwis'],
+  };
+  // rodzaj jest zapisany jako value selecta: 'kwartalny','polroczny','roczny','awaryjny' itd
+  const rodzajKey = (p.rodzaj||'roczny').toLowerCase()
+    .replace(/ó/g,'o').replace(/ę/g,'e').replace(/ą/g,'a')
+    .replace(/ó/g,'o').replace('półroczny','polroczny')
+    .replace('okresowy kwartalny','kwartalny')
+    .replace('okresowy polroczny','polroczny')
+    .replace('okresowy roczny','roczny');
+  const allowedScopes = scopeMap2[rodzajKey] || ['all','k','p','r'];
+  const items = allItems.filter(item => allowedScopes.includes(item.scope || 'all'));
+  const isAwaryjny = allowedScopes.length === 0;
+  const chk = isAwaryjny
+    ? '<div style="color:var(--muted);font-size:13px;padding:8px 0">Przegląd awaryjny — lista kontrolna nie dotyczy</div>'
+    : items.map(item => {
+    const s = p.checklist?.[item.id];
+    const icon = s==='ok'?'✅':s==='fail'?'❌':s==='na'?'➖':null;
+    if (!icon) return ''; // pomiń niezaznaczone
+    return `<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;">
+      <span style="flex-shrink:0">${icon}</span>
+      <span>${item.l}</span>
+    </div>`;
+  }).join('');
+
+  document.getElementById('modalBody').innerHTML = `
+    <div style="margin-bottom:16px">
+      <span class="type-badge tb-${p.typ.toLowerCase()}" style="margin-right:8px">${p.typ}</span>
+      <span style="font-size:13px;color:var(--muted)">${p.rodzaj}</span>
+    </div>
+    <div style="font-size:18px;font-weight:700;margin-bottom:4px">${p.obiekt}</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:8px">Data: ${p.data} · Serwisant: ${p.serwisant}</div>
+    ${p.modelCentrali ? `<div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:16px;font-size:12px;line-height:1.8">
+      <span style="color:var(--muted)">Centrala:</span> <b>${p.modelCentrali}</b>
+      ${p.iloscCentral ? ` &nbsp;·&nbsp; <span style="color:var(--muted)">Ilość:</span> <b>${p.iloscCentral}</b>` : ''}
+      ${p.lokalizacjaCentral ? `<br><span style="color:var(--muted)">Lokalizacja:</span> ${p.lokalizacjaCentral}` : ''}
+    </div>` : '<div style="margin-bottom:16px"></div>'}
+    <div style="font-weight:700;margin-bottom:10px;font-size:13px;color:var(--red2);text-transform:uppercase;letter-spacing:1px">Lista kontrolna</div>
+    ${chk}
+    ${p.usterki ? `<div style="margin-top:14px"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Usterki</div><div style="font-size:13px;line-height:1.6">${p.usterki}</div></div>` : ''}
+    ${p.zalecenia ? `<div style="margin-top:14px"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Zalecenia do uszkodzeń</div><div style="font-size:13px;line-height:1.6">${p.zalecenia}</div></div>` : ''}
+    ${p.nieprawidlowosci ? `<div style="margin-top:14px"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Nieprawidłowości</div><div style="font-size:13px;line-height:1.6">${p.nieprawidlowosci}</div></div>` : ''}
+    ${p.zalecenieNieprawidl ? `<div style="margin-top:14px"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Zalecenia do nieprawidłowości</div><div style="font-size:13px;line-height:1.6">${p.zalecenieNieprawidl}</div></div>` : ''}
+    ${p.adnotacjeBiuro ? `<div style="margin-top:14px;background:rgba(0,200,255,.06);border:1px solid rgba(0,200,255,.2);border-radius:8px;padding:10px 12px"><div style="font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">🏢 Adnotacje do biura</div><div style="font-size:13px;line-height:1.6">${p.adnotacjeBiuro}</div></div>` : ''}
+    ${p.infoKolejnySerwis ? `<div style="margin-top:10px;background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.2);border-radius:8px;padding:10px 12px"><div style="font-size:11px;color:var(--accent2,#ff6b35);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">🔧 Info do kolejnego serwisu</div><div style="font-size:13px;line-height:1.6">${p.infoKolejnySerwis}</div></div>` : ''}
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)" class="${wynikClass(p.wynik)}">
+      ${wynikIco(p.wynik)} ${p.wynik||'Brak'}
+    </div>
+    ${(p.przedstawiciel||p.firmaObiektu||p.uprawnieniaPrzedst) ? '<div style="margin-top:10px;font-size:12px;color:var(--muted);line-height:1.9">' +
+      (p.przedstawiciel ? 'Przedstawiciel: <b style="color:var(--text)">' + p.przedstawiciel + '</b><br>' : '') +
+      (p.firmaObiektu ? 'Firma obiektu: <b style="color:var(--text)">' + p.firmaObiektu + '</b><br>' : '') +
+      (p.uprawnieniaPrzedst ? 'Nr uprawnień: <b style="color:var(--text)">' + p.uprawnieniaPrzedst + '</b>' : '') +
+      '</div>' : ''}
+    <div style="margin-top:16px;display:flex;gap:10px;">
+      <button class="btn btn-red" style="flex:1;margin:0" onclick="exportOne(${p.id})">📊 Excel</button>
+      ${p.photos && p.photos.length ? `<div style="margin-top:14px">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">📷 Zdjęcia (${p.photos.length})</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">${p.photos.map(src=>`<img src="${src}" style="width:72px;height:72px;object-fit:cover;border-radius:8px;cursor:pointer" onclick="window.open('${src}','_blank')">`).join('')}</div>
+    </div>` : ''}
+    ${p.viewUrl ? `<button class="btn btn-ghost" style="flex:1;margin:0;color:var(--accent)" onclick="showLinkModal('${p.viewUrl}','${p.nr||''}')">🔗 Link</button>` : ''}
+      <button class="btn btn-ghost" style="flex:1;margin:0;color:#e74c3c;border-color:#e74c3c" onclick="delProto(${p.id})">🗑️ Usuń</button>
+    </div>
+  `;
+  document.getElementById('detailModal').classList.add('open');
+}
+
+function closeModal() { document.getElementById('detailModal').classList.remove('open'); }
+document.getElementById('detailModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
+
+function delProto(id) {
+  if (!confirm('Usunąć ten protokół?')) return;
+  protokoly = protokoly.filter(p => p.id !== id);
+  localStorage.setItem(SK, JSON.stringify(protokoly));
+  closeModal(); renderHistory(); updateBadge();
+  toast('🗑️ Protokół usunięty');
+}
+
+// ===================== EXCEL =====================
+function buildWS(p) {
+  const typ = p.typ;
+  const items = CL[typ] || CL.Inne;
+  const rows = [];
+  rows.push(['PROTOKÓŁ PRZEGLĄDU INSTALACJI PRZECIWPOŻAROWEJ','','','']);
+  rows.push(['Profi-Poż','','','']);
+  rows.push(['']);
+  rows.push(['Nr protokołu:', p.nr||'-', 'Data:', p.data]);
+  rows.push(['Typ instalacji:', p.typ, 'Rodzaj:', p.rodzaj]);
+  rows.push(['Obiekt:', p.obiekt,'','']);
+  rows.push(['Serwisant:', p.serwisant, '', '']);
+  rows.push(['Nr uprawnień:', p.uprawnienia||'-','','']);
+  rows.push(['Model centrali:', p.modelCentrali||'-', 'Ilość central:', p.iloscCentral||'-']);
+  rows.push(['Lokalizacja centrali:', p.lokalizacjaCentral||'-','','']);
+  rows.push(['']);
+  rows.push(['LISTA KONTROLNA','','','']);
+  rows.push(['Lp.', 'Punkt kontrolny', 'Opis', 'Wynik']);
+  items.forEach((item,i) => {
+    const s = p.checklist?.[item.id];
+    rows.push([i+1, item.l, item.n, s==='ok'?'OK':s==='fail'?'BŁĄD':s==='na'?'N/D':'-']);
+  });
+  rows.push(['']);
+  rows.push(['WYNIK PRZEGLĄDU:', p.wynik,'','']);
+  rows.push(['Usterki / Uszkodzenia:', p.usterki||'Brak','','']);
+  rows.push(['Zalecenia do uszkodzeń:', p.zalecenia||'-','','']);
+  rows.push(['Nieprawidłowości:', p.nieprawidlowosci||'-','','']);
+  rows.push(['Zalecenia do nieprawidłowości:', p.zalecenieNieprawidl||'-','','']);
+  rows.push(['Adnotacje do biura:', p.adnotacjeBiuro||'-','','']);
+  rows.push(['Info do kolejnego serwisu:', p.infoKolejnySerwis||'-','','']);
+  rows.push(['Przedstawiciel obiektu:', p.przedstawiciel||'-', 'Firma obiektu:', p.firmaObiektu||'-']);
+  rows.push(['Nr uprawnień przedstawiciela:', p.uprawnieniaPrzedst||'-','','']);
+  rows.push(['Data zapisu:', new Date(p.ts).toLocaleString('pl-PL'),'','']);
+  return rows;
+}
+
+function exportOne(id) {
+  const p = protokoly.find(x=>x.id===id);
+  if (!p) return;
+  const ws = XLSX.utils.aoa_to_sheet(buildWS(p));
+  ws['!cols'] = [{wch:24},{wch:34},{wch:34},{wch:14}];
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Protokół');
+  XLSX.writeFile(wb, `Protokol_${p.typ}_${p.data}_${(p.nr||'x').replace(/\//g,'-')}.xlsx`);
+  toast('📊 Excel pobrany!');
+  closeModal();
+}
+
+function exportAllToExcel() {
+  if (!protokoly.length) { toast('⚠️ Brak protokołów',1); return; }
+  const wb = XLSX.utils.book_new();
+  const sum = [
+    ['REJESTR PROTOKOŁÓW · PROFI-POŻ','','','','','','',''],
+    ['Wygenerowano:', new Date().toLocaleString('pl-PL'),'','','','','',''],
+    [''],
+    ['Typ','Rodzaj','Obiekt','Data','Serwisant','Wynik','Następny','Usterki'],
+    ...protokoly.map(p=>[p.typ,p.rodzaj,p.obiekt,p.data,p.serwisant,p.wynik,p.usterki||''])
+  ];
+  const ws0 = XLSX.utils.aoa_to_sheet(sum);
+  ws0['!cols'] = [14,7,20,30,12,20,16,22,14,40].map(w=>{return {wch:w}});
+  XLSX.utils.book_append_sheet(wb, ws0, 'Rejestr');
+  protokoly.forEach((p,i) => {
+    const ws = XLSX.utils.aoa_to_sheet(buildWS(p));
+    ws['!cols'] = [{wch:24},{wch:34},{wch:34},{wch:14}];
+    XLSX.utils.book_append_sheet(wb, ws, `${p.typ}_${i+1}`.substring(0,31));
+  });
+  const fn = localStorage.getItem('excelFileName') || 'protokoly_profipoz.xlsx';
+  XLSX.writeFile(wb, fn);
+  toast(`📊 Eksport ${protokoly.length} protokołów!`);
+}
+
+// ===================== SERVER =====================
+function loadServerConfig() {
+  document.getElementById('serverUrl').value = localStorage.getItem('serverUrl')||'';
+  document.getElementById('apiKey').value = localStorage.getItem('apiKey')||'';
+  document.getElementById('excelFileName').value = localStorage.getItem('excelFileName')||'protokoly_profipoz.xlsx';
+}
+
+function saveServerConfig() {
+  localStorage.setItem('serverUrl', document.getElementById('serverUrl').value);
+  localStorage.setItem('apiKey', document.getElementById('apiKey').value);
+  localStorage.setItem('excelFileName', document.getElementById('excelFileName').value);
+  toast('✅ Konfiguracja zapisana!');
+}
+
+async function testConnection() {
+  const url = document.getElementById('serverUrl').value;
+  if (!url) { toast('⚠️ Podaj URL serwera',1); return; }
+  try {
+    toast('🔌 Testowanie...');
+    const r = await fetch(url, {method:'GET',mode:'no-cors'});
+    toast('✅ Serwer osiągalny!');
+  } catch(e) {
+    toast('❌ Brak połączenia z serwerem',1);
+  }
+}
+
+// ===================== TOAST =====================
+let _tt;
+function toast(msg, err=0) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'show' + (err?' err':'');
+  clearTimeout(_tt);
+  _tt = setTimeout(()=>t.className='', 3200);
+}
+
+// ===================== ADMIN =====================
+
+const CL_DEFAULT_KEY = 'profipoz_cl_v1';
+const TYP_DEFAULT_KEY = 'profipoz_typ_v1';
+
+// Domyślne typy z etykietami
+const DEFAULT_TYPES = [
+  {key:'SSP',    label:'SSP – System Sygnalizacji Pożarowej'},
+  {key:'DSO',    label:'DSO – Dźwiękowy System Ostrzegawczy'},
+  {key:'SO_EL',  label:'SO – Oddymianie elektryczne'},
+  {key:'SO_PN',  label:'SO – Oddymianie pneumatyczne'},
+  {key:'PSP',    label:'PSP – System Powiadamiania Pożarowego'},
+  {key:'DSP',    label:'DSP – Detekcja i Sygnalizacja Pożaru'},
+  {key:'SUG',    label:'SUG – Stałe Urządzenia Gaśnicze'},
+  {key:'ODD_EL', label:'Oddymianie elektryczne (uproszczony)'},
+  {key:'ODD_PN', label:'Oddymianie pneumatyczne (uproszczony)'},
+  {key:'ODD_GR', label:'Oddymianie grawitacyjne'},
+  {key:'ODD_ME', label:'Oddymianie mechaniczne'},
+  {key:'Inne',   label:'Inne instalacje'},
+]
+
+// Załaduj typy (user lub default)
+function getTypes() {
+  const saved = localStorage.getItem(TYP_DEFAULT_KEY);
+  return saved ? JSON.parse(saved) : DEFAULT_TYPES;
+}
+
+function saveTypes(types) {
+  localStorage.setItem(TYP_DEFAULT_KEY, JSON.stringify(types));
+}
+
+// Załaduj CL (user lub wbudowane)
+function getCL() {
+  const saved = localStorage.getItem(CL_DEFAULT_KEY);
+  return saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(CL));
+}
+
+function saveCL(cl) {
+  localStorage.setItem(CL_DEFAULT_KEY, JSON.stringify(cl));
+  // Zaktualizuj globalny CL
+  Object.assign(CL, cl);
+  // Usuń klucze których nie ma w nowym CL
+  Object.keys(CL).forEach(k => { if (!cl[k]) delete CL[k]; });
+}
+
+// ── Renderuj listę typów ──
+function adminRenderTypes() {
+  const types = getTypes();
+  const el = document.getElementById('adminTypyList');
+  if (!types.length) { el.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:8px">Brak typów – dodaj pierwszy</div>'; return; }
+
+  el.innerHTML = types.map((t, i) => `
+    <div class="adm-typ-item">
+      <span class="adm-typ-key">${t.key}</span>
+      <span class="adm-typ-label">${t.label}</span>
+      ${t.key !== 'Inne' ? `<button class="adm-btn" onclick="adminUsunTyp('${t.key}')" title="Usuń">🗑️</button>` : ''}
+    </div>
+  `).join('');
+
+  // Odśwież select typów w edytorze
+  adminRefreshTypSelect();
+}
+
+// ── Select typów w edytorze listy kontrolnej ──
+function adminRefreshTypSelect() {
+  const types = getTypes();
+  const sel = document.getElementById('adminTypSelect');
+  const cur = sel.value;
+  sel.innerHTML = types.map(t => `<option value="${t.key}">${t.label}</option>`).join('');
+  if (cur && types.find(t => t.key === cur)) sel.value = cur;
+  adminRenderChecklist();
+}
+
+// ── Renderuj listę kontrolną wybranego typu ──
+function adminRenderChecklist() {
+  const typ = document.getElementById('adminTypSelect').value;
+  const cl = getCL();
+  const items = cl[typ] || [];
+  const el = document.getElementById('adminChkList');
+
+  if (!items.length) {
+    el.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:8px 0">Brak punktów – dodaj pierwszy poniżej</div>';
+    return;
+  }
+
+  el.innerHTML = items.map((item, i) => `
+    <div class="adm-item" id="adm-${typ}-${i}">
+      <div style="flex:1">
+        <div class="adm-item-text" contenteditable="true" onblur="adminEdytujLabel('${typ}',${i},this.innerText)">${item.l}</div>
+        <div class="adm-item-sub" contenteditable="true" onblur="adminEdytujNote('${typ}',${i},this.innerText)">${item.n || ''}</div>
+      </div>
+      <div style="display:flex;gap:2px;flex-shrink:0">
+        ${i > 0 ? `<button class="adm-btn" onclick="adminPrzesuń('${typ}',${i},-1)" title="W górę">↑</button>` : '<span style="width:28px"></span>'}
+        ${i < items.length-1 ? `<button class="adm-btn" onclick="adminPrzesuń('${typ}',${i},1)" title="W dół">↓</button>` : '<span style="width:28px"></span>'}
+        <button class="adm-btn" onclick="adminUsunPunkt('${typ}',${i})" title="Usuń" style="color:#e74c3c">🗑️</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── Edytuj treść punktu inline ──
+function adminEdytujLabel(typ, idx, val) {
+  const cl = getCL();
+  if (!cl[typ] || !cl[typ][idx]) return;
+  cl[typ][idx].l = val.trim() || cl[typ][idx].l;
+  saveCL(cl); updateChecklistSelect();
+}
+
+function adminEdytujNote(typ, idx, val) {
+  const cl = getCL();
+  if (!cl[typ] || !cl[typ][idx]) return;
+  cl[typ][idx].n = val.trim();
+  saveCL(cl);
+}
+
+// ── Przesuń punkt w górę/dół ──
+function adminPrzesuń(typ, idx, dir) {
+  const cl = getCL();
+  const items = cl[typ];
+  const newIdx = idx + dir;
+  if (newIdx < 0 || newIdx >= items.length) return;
+  [items[idx], items[newIdx]] = [items[newIdx], items[idx]];
+  saveCL(cl);
+  adminRenderChecklist();
+  toast('↕️ Kolejność zmieniona');
+}
+
+// ── Usuń punkt ──
+function adminUsunPunkt(typ, idx) {
+  if (!confirm('Usunąć ten punkt z listy kontrolnej?')) return;
+  const cl = getCL();
+  cl[typ].splice(idx, 1);
+  saveCL(cl);
+  adminRenderChecklist();
+  updateChecklistSelect();
+  toast('🗑️ Punkt usunięty');
+}
+
+// ── Dodaj nowy punkt ──
+function adminDodajPunkt() {
+  const typ = document.getElementById('adminTypSelect').value;
+  const lbl = document.getElementById('newChkLabel').value.trim();
+  const note = document.getElementById('newChkNote').value.trim();
+  if (!lbl) { toast('⚠️ Wpisz nazwę punktu!', 1); return; }
+
+  const cl = getCL();
+  if (!cl[typ]) cl[typ] = [];
+  const id = 'custom_' + Date.now();
+  cl[typ].push({ id, l: lbl, n: note });
+  saveCL(cl);
+
+  document.getElementById('newChkLabel').value = '';
+  document.getElementById('newChkNote').value = '';
+  adminRenderChecklist();
+  updateChecklistSelect();
+  toast('✅ Punkt dodany!');
+}
+
+// ── Dodaj nowy typ instalacji ──
+function adminDodajTyp() {
+  const key = document.getElementById('newTypKey').value.trim().toUpperCase().replace(/\s+/g,'_');
+  const label = document.getElementById('newTypLabel').value.trim();
+  if (!key || !label) { toast('⚠️ Wpisz klucz i nazwę typu!', 1); return; }
+
+  const types = getTypes();
+  if (types.find(t => t.key === key)) { toast('⚠️ Taki typ już istnieje!', 1); return; }
+
+  types.push({ key, label });
+  saveTypes(types);
+
+  const cl = getCL();
+  cl[key] = [];
+  saveCL(cl);
+
+  document.getElementById('newTypKey').value = '';
+  document.getElementById('newTypLabel').value = '';
+
+  adminRenderTypes();
+  rebuildTypSelect();
+  toast('✅ Nowy typ dodany!');
+}
+
+// ── Usuń typ instalacji ──
+function adminUsunTyp(key) {
+  if (!confirm(`Usunąć typ "${key}" i jego listę kontrolną?`)) return;
+  const types = getTypes().filter(t => t.key !== key);
+  saveTypes(types);
+  const cl = getCL();
+  delete cl[key];
+  saveCL(cl);
+  adminRenderTypes();
+  rebuildTypSelect();
+  toast('🗑️ Typ usunięty');
+}
+
+// ── Reset do domyślnych ──
+function adminReset() {
+  if (!confirm('Przywrócić domyślne listy kontrolne i typy? Twoje protokoły NIE zostaną usunięte.')) return;
+  localStorage.removeItem(CL_DEFAULT_KEY);
+  localStorage.removeItem(TYP_DEFAULT_KEY);
+  // Przywróć globalny CL
+  location.reload();
+}
+
+// ── Odśwież select typów w formularzu Nowy ──
+function rebuildTypSelect() {
+  const types = getTypes();
+  const sel = document.getElementById('typInstalacji');
+  const cur = sel.value;
+  sel.innerHTML = types.map(t => `<option value="${t.key}">${t.label}</option>`).join('');
+  if (types.find(t => t.key === cur)) sel.value = cur;
+  else sel.value = types[0]?.key || 'SSP';
+  updateChecklist(); 
+}
+
+// ── Przeładuj updateChecklist żeby używał getCL() ──
+function updateChecklistSelect() {
+  // Trigger re-render aktualnej checklisty w formularzu
+  updateChecklist();
+}
+
+// ── Init Admin przy starcie ──
+function initAdmin() {
+  // Załaduj customowe CL do globalnego CL
+  const saved = localStorage.getItem(CL_DEFAULT_KEY);
+  if (saved) {
+    const cl = JSON.parse(saved);
+    Object.keys(cl).forEach(k => CL[k] = cl[k]);
+  }
+  // Przebuduj select typów
+  rebuildTypSelect();
+}
+
+// updateChecklist działa już globalnie z filtrami scope
+
+
+
+
+// ===================== PANEL PRZEGLĄDÓW =====================
+let _panelTyp   = '';
+let _panelWynik = '';
+let _panelObiekt = null; // null = widok listy obiektów
+
+function panelSetTyp(typ) {
+  _panelTyp = typ;
+  document.querySelectorAll('[id^="pf-"]').forEach(b => b.classList.remove('active'));
+  document.getElementById('pf-' + (typ || 'all')).classList.add('active');
+  _panelObiekt = null;
+  panelRender();
+}
+
+function panelSetWynik(w) {
+  _panelWynik = w;
+  document.querySelectorAll('[id^="pw-"]').forEach(b => b.classList.remove('active'));
+  const map = {'':'all','Sprawny':'ok','Sprawny z uwagami':'uwagi','Niesprawny':'zly','Nie w pełni sprawny':'zly'};
+  document.getElementById('pw-' + (map[w]||'all')).classList.add('active');
+  _panelObiekt = null;
+  panelRender();
+}
+
+function panelGetFiltered() {
+  const q = (document.getElementById('panelSearch')?.value || '').toLowerCase();
+  return [...protokoly].reverse().filter(p => {
+    if (_panelTyp && p.typ !== _panelTyp) return false;
+    if (_panelWynik && !p.wynik?.startsWith(_panelWynik)) return false;
+    if (q && !p.obiekt?.toLowerCase().includes(q)) return false;
+    return true;
+  });
+}
+
+function panelRender() {
+  panelRenderStats();
+  if (_panelObiekt) {
+    panelRenderProtos(_panelObiekt);
+  } else {
+    panelRenderObiekty();
+  }
+}
+
+function panelRenderStats() {
+  const all = panelGetFiltered();
+  const sprawne   = all.filter(p => p.wynik?.startsWith('Sprawny') && !p.wynik?.includes('uwag')).length;
+  const uwagi     = all.filter(p => p.wynik?.includes('uwag')).length;
+  const zle       = all.filter(p => p.wynik?.startsWith('Nie') || p.wynik === 'Niesprawny').length;
+  const obiekty   = new Set(all.map(p => p.obiekt)).size;
+  document.getElementById('panelStats').innerHTML = `
+    <div class="stat-box"><div class="stat-box-v" style="color:var(--red2)">${all.length}</div><div class="stat-box-l">Protokołów</div></div>
+    <div class="stat-box"><div class="stat-box-v" style="color:#4caf50">${sprawne}</div><div class="stat-box-l">Sprawnych</div></div>
+    <div class="stat-box"><div class="stat-box-v" style="color:#ff9800">${uwagi}</div><div class="stat-box-l">Z uwagami</div></div>
+    <div class="stat-box"><div class="stat-box-v" style="color:#e74c3c">${zle}</div><div class="stat-box-l">Niesprawnych</div></div>
+  `;
+}
+
+function panelRenderObiekty() {
+  const all = panelGetFiltered();
+  document.getElementById('panelProtoView').style.display = 'none';
+  const el = document.getElementById('panelObiektView');
+  el.style.display = '';
+
+  if (!all.length) {
+    el.innerHTML = '<div style="text-align:center;padding:40px 20px;color:var(--muted)"><div style="font-size:40px;margin-bottom:12px">📭</div>Brak protokołów dla wybranych filtrów</div>';
+    return;
+  }
+
+  // Grupuj po obiekcie
+  const grupy = {};
+  all.forEach(p => {
+    const k = p.obiekt || 'Brak nazwy';
+    if (!grupy[k]) grupy[k] = [];
+    grupy[k].push(p);
+  });
+
+  // Sortuj obiekty wg daty ostatniego protokołu
+  const sorted = Object.entries(grupy).sort((a,b) => {
+    const da = a[1][0]?.data || '';
+    const db = b[1][0]?.data || '';
+    return db.localeCompare(da);
+  });
+
+  el.innerHTML = sorted.map(([nazwa, protos]) => {
+    const last = protos[0];
+    const wynikColor = last.wynik?.startsWith('Nie') ? '#e74c3c'
+                     : last.wynik?.includes('uwag') ? '#ff9800' : '#4caf50';
+    const wynikIco   = last.wynik?.startsWith('Nie') ? '❌'
+                     : last.wynik?.includes('uwag') ? '⚠️' : '✅';
+    const typy = [...new Set(protos.map(p=>p.typ))].join(', ');
+
+    return `<div class="obj-card" data-n="${encodeURIComponent(nazwa)}" onclick="panelOpenObiekt(decodeURIComponent(this.dataset.n))">
+      <div class="obj-name">${nazwa}</div>
+      <div class="obj-meta">
+        <span>📁 ${protos.length} protokół${protos.length===1?'':'ów'}</span>
+        <span>🔧 ${typy}</span>
+      </div>
+      <div class="obj-last">
+        <div style="font-size:12px;color:var(--muted)">Ostatni: <b style="color:var(--text)">${last.data}</b> · ${last.rodzaj}</div>
+        <div style="font-size:12px;font-weight:700;color:${wynikColor}">${wynikIco} ${last.wynik||'-'}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function panelOpenObiekt(nazwa) {
+  _panelObiekt = nazwa;
+  panelRenderProtos(nazwa);
+}
+
+function panelRenderProtos(nazwa) {
+  document.getElementById('panelObiektView').style.display = 'none';
+  const el = document.getElementById('panelProtoView');
+  el.style.display = '';
+
+  const protos = panelGetFiltered().filter(p => (p.obiekt||'Brak nazwy') === nazwa);
+
+  // Statystyki obiektu
+  const sprawne = protos.filter(p => p.wynik?.startsWith('Sprawny') && !p.wynik?.includes('uwag')).length;
+  const uwagi   = protos.filter(p => p.wynik?.includes('uwag')).length;
+  const zle     = protos.filter(p => p.wynik?.startsWith('Nie') || p.wynik === 'Niesprawny').length;
+  const typy    = [...new Set(protos.map(p=>p.typ))].join(' · ');
+
+  el.innerHTML = `
+    <div class="panel-back" onclick="panelBackToList()">← Powrót do listy obiektów</div>
+
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px">
+      <div style="font-size:18px;font-weight:800;margin-bottom:8px">${nazwa}</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:12px">Systemy: ${typy}</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+        <div class="stat-box"><div class="stat-box-v" style="color:#4caf50">${sprawne}</div><div class="stat-box-l">Sprawnych</div></div>
+        <div class="stat-box"><div class="stat-box-v" style="color:#ff9800">${uwagi}</div><div class="stat-box-l">Z uwagami</div></div>
+        <div class="stat-box"><div class="stat-box-v" style="color:#e74c3c">${zle}</div><div class="stat-box-l">Niesprawnych</div></div>
+      </div>
+    </div>
+
+    <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">
+      Historia protokołów (${protos.length})
+    </div>
+
+    ${protos.map(p => {
+      const wynikColor = p.wynik?.startsWith('Nie') ? '#e74c3c'
+                       : p.wynik?.includes('uwag') ? '#ff9800' : '#4caf50';
+      const wynikIco   = p.wynik?.startsWith('Nie') ? '❌'
+                       : p.wynik?.includes('uwag') ? '⚠️' : '✅';
+      const hasPhotos  = p.photos?.length > 0;
+      return `<div class="panel-proto-card" onclick="showDetail(${p.id})">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <span class="type-badge tb-${p.typ.toLowerCase()}">${p.typ}</span>
+          <span style="font-size:12px;color:var(--muted);flex:1">${p.rodzaj}</span>
+          <span style="font-size:12px;color:var(--muted)">${p.data}</span>
+        </div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:6px">👤 ${p.serwisant||'-'}</div>
+        ${p.usterki ? `<div style="font-size:12px;color:#ff9800;margin-bottom:4px">⚠️ ${p.usterki.substring(0,80)}${p.usterki.length>80?'…':''}</div>` : ''}
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
+          <div style="font-size:13px;font-weight:700;color:${wynikColor}">${wynikIco} ${p.wynik||'-'}</div>
+          <div style="display:flex;gap:8px;font-size:11px;color:var(--muted)">
+            ${hasPhotos ? `<span>📷 ${p.photos.length}</span>` : ''}
+            <span style="color:var(--red2)">Szczegóły →</span>
+          </div>
+        </div>
+      </div>`;
+    }).join('')}
+  `;
+}
+
+function panelBackToList() {
+  _panelObiekt = null;
+  panelRender();
+}
+
+// ===================== ZDJĘCIA =====================
+let photos = []; // base64 array
+
+function handlePhotos(input) {
+  const files = Array.from(input.files);
+  if (!files.length) return;
+
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      photos.push({ name: file.name, data: e.target.result });
+      renderPhotos();
+    };
+    reader.readAsDataURL(file);
+  });
+  input.value = ''; // reset żeby można dodać te same zdjęcia ponownie
+}
+
+function renderPhotos() {
+  const el = document.getElementById('photoPreview');
+  if (!el) return;
+  el.innerHTML = photos.map((p, i) => `
+    <div style="position:relative;width:80px;height:80px;border-radius:8px;overflow:hidden;flex-shrink:0">
+      <img src="${p.data}" style="width:100%;height:100%;object-fit:cover">
+      <button onclick="removePhoto(${i})" style="position:absolute;top:2px;right:2px;
+        background:rgba(0,0,0,.7);border:none;color:#fff;border-radius:50%;
+        width:20px;height:20px;font-size:11px;cursor:pointer;line-height:1">✕</button>
+    </div>
+  `).join('');
+  const lbl = document.getElementById('photoLabel');
+  if (lbl) lbl.innerHTML = photos.length
+    ? `<span style="font-size:18px">📷</span> Dodaj więcej (${photos.length} szt.)`
+    : `<span style="font-size:24px">📷</span> Kliknij aby dodać zdjęcia`;
+}
+
+function removePhoto(idx) {
+  photos.splice(idx, 1);
+  renderPhotos();
+}
+
+function resetPhotos() {
+  photos = [];
+  renderPhotos();
+}
+
+// ===================== PIN SERWER =====================
+function serwerPinCheck() {
+  if (adminUnlocked) { showScreen("serwer"); document.getElementById("nb-serwer").classList.add("active"); return; }
+  _pinTarget = "serwer";
+  document.getElementById("pinDots").innerHTML = "";
+  document.getElementById("pinError").style.display = "none";
+  window._pinVal = "";
+  renderPinDots();
+  document.getElementById("pinModal").classList.add("open");
+}
+
+// ===================== PIN ADMIN =====================
+const ADMIN_PIN = '0705';
+let adminUnlocked = false;
+
+let _pinTarget = 'admin'; // 'admin' lub 'serwer'
+
+function adminPinCheck() {
+  if (adminUnlocked) {
+    showScreen('admin');
+    document.getElementById('nb-admin').classList.add('active');
+    return;
+  }
+  _pinTarget = 'admin';
+  document.getElementById('pinDots').innerHTML = '';
+  document.getElementById('pinError').style.display = 'none';
+  window._pinVal = '';
+  renderPinDots();
+  document.getElementById('pinModal').classList.add('open');
+}
+
+function pinKey(val) {
+  if (window._pinVal.length >= 4) return;
+  window._pinVal += val;
+  renderPinDots();
+  if (window._pinVal.length === 4) {
+    setTimeout(checkPin, 120);
+  }
+}
+
+function pinDel() {
+  window._pinVal = window._pinVal.slice(0, -1);
+  renderPinDots();
+}
+
+function renderPinDots() {
+  const len = (window._pinVal || '').length;
+  document.getElementById('pinDots').innerHTML = [0,1,2,3].map(i =>
+    `<div style="width:18px;height:18px;border-radius:50%;border:2px solid var(--red);
+      background:${i < len ? 'var(--red)' : 'transparent'};transition:background .15s;"></div>`
+  ).join('');
+}
+
+function checkPin() {
+  if (window._pinVal === ADMIN_PIN) {
+    adminUnlocked = true;
+    document.getElementById('pinModal').classList.remove('open');
+    if (_pinTarget === 'serwer') {
+      showScreen('serwer');
+      document.getElementById('nb-serwer').classList.add('active');
+      toast('🔓 Ustawienia serwera odblokowane');
+    } else {
+      showScreen('admin');
+      document.getElementById('nb-admin').classList.add('active');
+      toast('🔓 Panel Admin odblokowany');
+    }
+  } else {
+    document.getElementById('pinError').style.display = 'block';
+    document.getElementById('pinDots').innerHTML = [0,1,2,3].map(() =>
+      `<div style="width:18px;height:18px;border-radius:50%;border:2px solid #e74c3c;background:#e74c3c;"></div>`
+    ).join('');
+    setTimeout(() => {
+      window._pinVal = '';
+      renderPinDots();
+      document.getElementById('pinError').style.display = 'none';
+    }, 900);
+  }
+}
+
+function closePinModal() {
+  document.getElementById('pinModal').classList.remove('open');
+  window._pinVal = '';
+}
+
+// Zablokuj Admin po wyjściu z zakładki
+const _origShowScreen = showScreen;
+
+</script>
+
+<!-- MODAL PIN ADMIN -->
+<div class="modal-overlay" id="pinModal">
+  <div class="modal" style="max-width:320px;padding:32px 24px 28px;text-align:center">
+    <div style="font-size:36px;margin-bottom:6px">🔒</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;margin-bottom:4px">Panel Admin</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:28px">Wprowadź kod PIN</div>
+
+    <div style="display:flex;justify-content:center;gap:14px;margin-bottom:24px" id="pinDots"></div>
+
+    <div style="color:#e74c3c;font-size:12px;margin-bottom:16px;display:none" id="pinError">❌ Nieprawidłowy PIN</div>
+
+    <!-- Klawiatura -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:240px;margin:0 auto">
+      <button class="pin-btn" onclick="pinKey('1')">1</button>
+      <button class="pin-btn" onclick="pinKey('2')">2</button>
+      <button class="pin-btn" onclick="pinKey('3')">3</button>
+      <button class="pin-btn" onclick="pinKey('4')">4</button>
+      <button class="pin-btn" onclick="pinKey('5')">5</button>
+      <button class="pin-btn" onclick="pinKey('6')">6</button>
+      <button class="pin-btn" onclick="pinKey('7')">7</button>
+      <button class="pin-btn" onclick="pinKey('8')">8</button>
+      <button class="pin-btn" onclick="pinKey('9')">9</button>
+      <button class="pin-btn pin-del" onclick="closePinModal()" style="font-size:13px;color:var(--muted)">Anuluj</button>
+      <button class="pin-btn" onclick="pinKey('0')">0</button>
+      <button class="pin-btn pin-del" onclick="pinDel()">⌫</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
