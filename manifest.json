@@ -1,6 +1,6 @@
 {
-  "name": "Profi-Poż Protokoły",
-  "short_name": "ProtokołMaker",
+  "name": "Profi-Poż",
+  "short_name": "Profi-Poż",
   "description": "Protokoły przeglądów SSP, DSO, PSP",
   "start_url": "./index.html",
   "display": "standalone",

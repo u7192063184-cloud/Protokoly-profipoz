@@ -335,9 +335,18 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif;background
           <label>Data przeglądu</label>
           <input type="date" id="dataPrzegladu">
         </div>
-        <div class="field">
+        <div class="field" style="position:relative">
           <label>Obiekt / Lokalizacja</label>
-          <input type="text" id="obiekt" placeholder="Nazwa i adres obiektu" autocomplete="off">
+          <input type="text" id="obiekt" placeholder="Nazwa i adres obiektu" autocomplete="off"
+            oninput="autocompleteObiekt(this.value)"
+            onkeydown="autocompleteKey(event)"
+            onfocus="autocompleteObiekt(this.value)"
+            onblur="setTimeout(()=>hideAC(),200)">
+          <div id="ac-list" style="
+            display:none; position:absolute; left:0; right:0; top:100%; z-index:999;
+            background:#fff; border:1px solid #ccc; border-radius:0 0 8px 8px;
+            box-shadow:0 4px 16px rgba(0,0,0,.15); max-height:220px; overflow-y:auto;
+          "></div>
         </div>
         <div class="row2">
           <div class="field">
@@ -484,6 +493,7 @@ html,body{height:100%;overflow:hidden;font-family:'Barlow',sans-serif;background
         <div style="display:flex;gap:10px;margin-top:4px;">
           <button class="btn btn-red" style="margin:0;flex:1" onclick="saveServerConfig()">💾 Zapisz</button>
           <button class="btn btn-ghost" style="margin:0;flex:1" onclick="testConnection()">🔌 Test</button>
+          <button class="btn btn-ghost" style="margin:0;flex:1" onclick="loadObiektyManual()">🏢 Obiekty</button>
         </div>
       </div>
       <div class="card">
@@ -594,52 +604,27 @@ Content-Type: application/json
 
     <!-- PANEL PRZEGLĄDÓW -->
     <div class="screen" id="s-panel">
-
-      <!-- Nagłówek + wyszukiwarka -->
-      <div style="padding:16px 16px 0">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;letter-spacing:.5px;margin-bottom:12px">
-          📊 Panel przeglądów
-        </div>
-
-        <!-- Szukaj po obiekcie -->
-        <div style="position:relative;margin-bottom:10px">
-          <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none">🔍</span>
-          <input type="text" id="panelSearch" placeholder="Szukaj obiektu..."
-            oninput="panelRender()"
-            style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;
-                   color:var(--text);font-family:'Barlow',sans-serif;font-size:15px;
-                   padding:11px 12px 11px 38px;outline:none;box-sizing:border-box">
-        </div>
-
-        <!-- Filtry -->
-        <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none">
-          <button class="pf-btn active" id="pf-all"   onclick="panelSetTyp('')">Wszystkie</button>
-          <button class="pf-btn" id="pf-SSP"    onclick="panelSetTyp('SSP')">SSP</button>
-          <button class="pf-btn" id="pf-DSO"    onclick="panelSetTyp('DSO')">DSO</button>
-          <button class="pf-btn" id="pf-SO_EL"  onclick="panelSetTyp('SO_EL')">SO El.</button>
-          <button class="pf-btn" id="pf-SO_PN"  onclick="panelSetTyp('SO_PN')">SO Pn.</button>
-          <button class="pf-btn" id="pf-PSP"    onclick="panelSetTyp('PSP')">PSP</button>
-          <button class="pf-btn" id="pf-SUG"    onclick="panelSetTyp('SUG')">SUG</button>
-          <button class="pf-btn" id="pf-Inne"   onclick="panelSetTyp('Inne')">Inne</button>
-        </div>
-
-        <!-- Filtr wynik -->
-        <div style="display:flex;gap:8px;margin-bottom:12px">
-          <button class="pf-btn pf-sm active" id="pw-all"     onclick="panelSetWynik('')">Wszystkie</button>
-          <button class="pf-btn pf-sm" id="pw-ok"      onclick="panelSetWynik('Sprawny')">✅ Sprawny</button>
-          <button class="pf-btn pf-sm" id="pw-uwagi"   onclick="panelSetWynik('Sprawny z uwagami')">⚠️ Z uwagami</button>
-          <button class="pf-btn pf-sm" id="pw-zly"     onclick="panelSetWynik('Niesprawny')">❌ Niesprawny</button>
-        </div>
-      </div>
-
-      <!-- Statystyki globalne -->
-      <div id="panelStats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 16px 12px"></div>
-
-      <!-- Widok: lista obiektów lub lista protokołów -->
-      <div id="panelObiektView" style="padding:0 16px 100px"></div>
-      <div id="panelProtoView"  style="padding:0 16px 100px;display:none"></div>
-
+  <div style="padding:16px 16px 0">
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;margin-bottom:12px">📊 Panel przeglądów</div>
+    <input type="text" id="panelSearch" placeholder="🔍 Szukaj obiektu..." oninput="panelRender()"
+      style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;padding:11px 12px;outline:none;box-sizing:border-box;margin-bottom:10px">
+    <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none">
+      <button class="pf-btn active" id="pf-all"    onclick="panelSetTyp('')">Wszystkie</button>
+      <button class="pf-btn" id="pf-SSP"   onclick="panelSetTyp('SSP')">SSP</button>
+      <button class="pf-btn" id="pf-DSO"   onclick="panelSetTyp('DSO')">DSO</button>
+      <button class="pf-btn" id="pf-SO_EL" onclick="panelSetTyp('SO_EL')">SO El.</button>
+      <button class="pf-btn" id="pf-SO_PN" onclick="panelSetTyp('SO_PN')">SO Pn.</button>
     </div>
+    <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none">
+      <button class="pf-btn active" id="pw-all"  onclick="panelSetWynik('')">Wszystkie</button>
+      <button class="pf-btn" id="pw-ok"   onclick="panelSetWynik('Sprawny')">✅ Sprawny</button>
+      <button class="pf-btn" id="pw-uwagi" onclick="panelSetWynik('uwagi')">⚠️ Z uwagami</button>
+      <button class="pf-btn" id="pw-zly"  onclick="panelSetWynik('Niesprawny')">❌ Niesprawny</button>
+    </div>
+    <div id="panelStats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding-bottom:12px"></div>
+  </div>
+  <div id="panelObiektView" style="padding:0 16px 100px"></div>
+  <div id="panelProtoView"  style="padding:0 16px 100px;display:none"></div>  </div>
   </div><!-- /content -->
 
   <!-- BOTTOM NAV -->
@@ -709,70 +694,22 @@ Content-Type: application/json
 <script>
 // ===================== DATA =====================
 const SK = 'profipoz_v1';
+const DEFAULT_SERVER_URL = 'https://script.google.com/macros/s/AKfycbym0Yl3FwSXKMNabTPf6zzBK5QSZ8pb6Uv7uSe5BXY6Jnz_60gQmNggUQAkxkDCFu7G5g/exec';
+if (!localStorage.getItem('serverUrl')) localStorage.setItem('serverUrl', DEFAULT_SERVER_URL);
+
+// Załaduj obiekty do autocomplete przy starcie
+window.addEventListener('DOMContentLoaded', function() {
+  setTimeout(loadObiekty, 1500); // po załadowaniu apki
+});
 const SK_DRAFT = 'profipoz_draft';
+const SK_DRAFTS = 'profipoz_drafts';
 let protokoly = JSON.parse(localStorage.getItem(SK) || '[]');
+let serverProtokoly = []; // protokoły z serwera (wszystkich użytkowników)
+let allProtokoly = []; // połączone lokalne + serwer (bez duplikatów)
+let _obiektyCache = JSON.parse(localStorage.getItem('profipoz_obiekty') || '[]'); // cache obiektów
 
 
-function panelGetFiltered() {
-  var q = ((document.getElementById('panelSearch')||{}).value||'').toLowerCase().trim();
-  return protokoly.slice().reverse().filter(function(p) {
-    if (_panelTyp && p.typ !== _panelTyp) return false;
-    if (_panelWynik === 'uwagi' && !(p.wynik||'').toLowerCase().includes('uwag')) return false;
-    if (_panelWynik && _panelWynik !== 'uwagi' && !(p.wynik||'').startsWith(_panelWynik)) return false;
-    if (q && !(p.obiekt||'').toLowerCase().includes(q)) return false;
-    return true;
-  });
-}
 
-function panelOpenObiekt(nazwa) {
-  _panelObiekt = nazwa;
-  panelRenderProtos(nazwa);
-}
-
-function panelRenderProtos(nazwa) {
-  document.getElementById('panelObiektView').style.display = 'none';
-  var el = document.getElementById('panelProtoView');
-  el.style.display = '';
-  var protos = panelGetFiltered().filter(function(p){ return (p.obiekt||'Brak nazwy') === nazwa; });
-  var sprawne = protos.filter(function(p){return (p.wynik||'').startsWith('Sprawny')&&!(p.wynik||'').includes('uwag');}).length;
-  var uwagi   = protos.filter(function(p){return (p.wynik||'').includes('uwag');}).length;
-  var zle     = protos.filter(function(p){var w=p.wynik||'';return w.startsWith('Nie')||w==='Niesprawny';}).length;
-  var typy    = protos.map(function(p){return p.typ;}).filter(function(v,i,a){return a.indexOf(v)===i;}).join(' / ');
-
-  var html = '<div onclick="panelBackToList()" style="display:flex;align-items:center;gap:6px;padding-bottom:12px;color:var(--red2);font-size:14px;font-weight:700;cursor:pointer">&#8592; Powrót do listy</div>';
-  html += '<div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px">';
-  html += '<div style="font-size:17px;font-weight:800;margin-bottom:6px">'+nazwa+'</div>';
-  html += '<div style="font-size:12px;color:var(--muted);margin-bottom:12px">Systemy: '+(typy||'-')+'</div>';
-  html += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">';
-  html += '<div class="sbox"><div class="sbox-v" style="color:#4caf50">'+sprawne+'</div><div class="sbox-l">Sprawnych</div></div>';
-  html += '<div class="sbox"><div class="sbox-v" style="color:#ff9800">'+uwagi+'</div><div class="sbox-l">Z uwagami</div></div>';
-  html += '<div class="sbox"><div class="sbox-v" style="color:#e74c3c">'+zle+'</div><div class="sbox-l">Niesprawnych</div></div>';
-  html += '</div></div>';
-  html += '<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Historia protokołów ('+protos.length+')</div>';
-
-  protos.forEach(function(p) {
-    var kolor = (p.wynik||'').startsWith('Nie') ? '#e74c3c' : (p.wynik||'').includes('uwag') ? '#ff9800' : '#4caf50';
-    var ico   = (p.wynik||'').startsWith('Nie') ? '❌' : (p.wynik||'').includes('uwag') ? '⚠️' : '✅';
-    html += '<div class="pp-card" onclick="showDetail('+p.id+')">';
-    html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">';
-    html += '<span class="type-badge tb-'+(p.typ||'').toLowerCase()+'">'+p.typ+'</span>';
-    html += '<span style="font-size:12px;color:var(--muted);flex:1">'+(p.rodzaj||'')+'</span>';
-    html += '<span style="font-size:12px;color:var(--muted)">'+(p.data||'')+'</span>';
-    html += '</div>';
-    html += '<div style="font-size:13px;color:var(--muted);margin-bottom:6px">&#128100; '+(p.serwisant||'-')+'</div>';
-    if(p.usterki) html += '<div style="font-size:12px;color:#ff9800;margin-bottom:6px">&#9888; '+p.usterki.substring(0,80)+(p.usterki.length>80?'…':'')+'</div>';
-    html += '<div style="display:flex;align-items:center;justify-content:space-between">';
-    html += '<div style="font-size:13px;font-weight:700;color:'+kolor+'">'+ico+' '+(p.wynik||'-')+'</div>';
-    html += '<span style="font-size:11px;color:var(--red2)">Szczegóły →</span>';
-    html += '</div></div>';
-  });
-  el.innerHTML = html;
-}
-
-function panelBackToList() {
-  _panelObiekt = null;
-  panelRender();
-}
 
 
 
@@ -1014,7 +951,38 @@ window.onload = () => {
   }
 
   // PWA install
-  window.addEventListener('beforeinstallprompt', e => {
+  
+// Auto-szkic przy wyjściu/przejściu z formularza
+function autoSaveDraft() {
+  const d = getForm();
+  // Zapisz tylko jeśli coś jest wpisane
+  if (!d.obiekt && !d.typ && !d.serwisant) return;
+  d._draft = true;
+  d._draftId = d._draftId || Date.now();
+  d._draftLabel = (d.obiekt || d.typ || 'Auto-szkic') + ' · ' + (d.data || new Date().toLocaleDateString('pl'));
+  d._auto = true;
+  const drafts = JSON.parse(localStorage.getItem(SK_DRAFTS) || '[]');
+  // Zastąp istniejący auto-szkic lub dodaj nowy
+  const idx = drafts.findIndex(x => x._auto && x._draftId === d._draftId);
+  if (idx >= 0) drafts[idx] = d;
+  else drafts.push(d);
+  localStorage.setItem(SK_DRAFTS, JSON.stringify(drafts));
+}
+
+// Zapisz szkic gdy użytkownik opuszcza formularz
+document.addEventListener('visibilitychange', function() {
+  if (document.visibilityState === 'hidden') {
+    const activeScreen = document.querySelector('.screen.active');
+    if (activeScreen && activeScreen.id === 's-nowy') autoSaveDraft();
+  }
+});
+
+window.addEventListener('beforeunload', function() {
+  const activeScreen = document.querySelector('.screen.active');
+  if (activeScreen && activeScreen.id === 's-nowy') autoSaveDraft();
+});
+
+window.addEventListener('beforeinstallprompt', e => {
     e.preventDefault();
     window._installEvt = e;
     document.getElementById('installBanner').style.display = 'block';
@@ -1045,8 +1013,17 @@ function showScreen(name) {
   var btn = document.getElementById('nb-'+name);
   if(scr) scr.classList.add('active');
   if(btn) btn.classList.add('active');
-  if(name==='historia') renderHistory();
-  if(name==='panel'){_panelTyp='';_panelWynik='';_panelObiekt=null;panelRender();}
+  if(name==='historia') {
+    document.getElementById('protoList').innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)">⏳ Ładowanie...</div>';
+    syncFromServer().then(() => renderHistory());
+  }
+  if(name==='panel'){
+    _panelTyp='';_panelWynik='';_panelObiekt=null;
+    document.getElementById('panelObiektView').innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)">⏳ Ładowanie...</div>';
+    document.getElementById('panelProtoView').style.display='none';
+    document.getElementById('panelObiektView').style.display='';
+    syncFromServer().then(function(){ if(!_panelObiekt) panelShowLista(); });
+  }
   if(name==='admin'){adminRenderTypes();adminRefreshTypSelect();}
 }
 
@@ -1171,6 +1148,7 @@ function getForm() {
 
 function valid(d) {
   if (!d.obiekt) { toast('⚠️ Podaj nazwę obiektu!',1); return false; }
+  maybeSaveObiektToServer(d); // Zapisz/aktualizuj obiekt w bazie
   if (!d.serwisant) { toast('⚠️ Podaj imię serwisanta!',1); return false; }
   return true;
 }
@@ -1179,15 +1157,65 @@ function zapiszProtokol() {
   const d = getForm();
   if (!d.obiekt && !d.typ) { toast('⚠️ Uzupełnij chociaż obiekt lub typ instalacji'); return; }
   d._draft = true;
-  localStorage.setItem(SK_DRAFT, JSON.stringify(d));
-  toast('💾 Szkic zapisany — możesz wrócić później!');
+  d._draftId = Date.now();
+  d._draftLabel = (d.obiekt || d.typ || 'Szkic') + ' · ' + (d.data || new Date().toLocaleDateString('pl'));
+  const drafts = JSON.parse(localStorage.getItem(SK_DRAFTS) || '[]');
+  drafts.push(d);
+  localStorage.setItem(SK_DRAFTS, JSON.stringify(drafts));
+  toast('💾 Szkic zapisany!');
 }
 
 function wczytajSzkic() {
-  const raw = localStorage.getItem(SK_DRAFT);
-  if (!raw) { toast('Brak zapisanego szkicu'); return; }
-  const d = JSON.parse(raw);
-  // Wypełnij formularz
+  const drafts = JSON.parse(localStorage.getItem(SK_DRAFTS) || '[]');
+  // Migracja starego formatu
+  const stary = localStorage.getItem(SK_DRAFT);
+  if (stary) {
+    try {
+      const d = JSON.parse(stary);
+      d._draftId = d._draftId || 1;
+      d._draftLabel = d._draftLabel || (d.obiekt || d.typ || 'Szkic');
+      drafts.unshift(d);
+      localStorage.setItem(SK_DRAFTS, JSON.stringify(drafts));
+      localStorage.removeItem(SK_DRAFT);
+    } catch(e) {}
+  }
+  if (!drafts.length) { toast('Brak zapisanych szkiców'); return; }
+  // Pokaż modal z listą szkiców
+  showDraftsModal(drafts);
+}
+
+function showDraftsModal(drafts) {
+  let modal = document.getElementById('draftsModal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'draftsModal';
+    modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:flex-end';
+    document.body.appendChild(modal);
+  }
+  modal.innerHTML = `
+    <div style="background:var(--surface);width:100%;border-radius:18px 18px 0 0;padding:20px;max-height:70vh;overflow-y:auto">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <h3 style="margin:0;font-size:16px">📂 Zapisane szkice (${drafts.length})</h3>
+        <button onclick="document.getElementById('draftsModal').remove()" style="background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer">✕</button>
+      </div>
+      ${drafts.map((d,i) => `
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">
+          <div onclick="loadDraft(${d._draftId})" style="flex:1;cursor:pointer">
+            <div style="font-weight:700;font-size:14px">${d.obiekt || d.typ || 'Szkic'}</div>
+            <div style="font-size:12px;color:var(--muted)">${d.typ || ''} · ${d.rodzaj || ''} · ${d.data || ''}</div>
+          </div>
+          <button onclick="deleteDraft(${d._draftId})" style="background:none;border:none;color:#e74c3c;font-size:18px;cursor:pointer;padding:4px 8px">🗑️</button>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  modal.style.display = 'flex';
+}
+
+function loadDraft(draftId) {
+  const drafts = JSON.parse(localStorage.getItem(SK_DRAFTS) || '[]');
+  const d = drafts.find(x => x._draftId === draftId);
+  if (!d) return;
   const set = (id, val) => { const el = document.getElementById(id); if(el && val) el.value = val; };
   set('typInstalacji', d.typ);
   set('rodzajPrzegladu', d.rodzaj);
@@ -1204,20 +1232,23 @@ function wczytajSzkic() {
   set('adnotacjeBiuro', d.adnotacjeBiuro);
   set('infoKolejnySerwis', d.infoKolejnySerwis);
   set('wynikPrzegladu', d.wynik);
-  // Odśwież checklist i zaznacz zapisane wartości
   updateChecklist();
-  if (d.checklist) {
-    Object.entries(d.checklist).forEach(([id, val]) => {
-      if (val) setSt(id, val);
-    });
-  }
-  // Zdjęcia
-  if (d.photos && d.photos.length) {
-    photos = d.photos.map(src => ({data:src}));
-    renderPhotos();
-  }
+  if (d.checklist) Object.entries(d.checklist).forEach(([id, val]) => { if(val) setSt(id, val); });
+  if (d.photos && d.photos.length) { photos = d.photos.map(src => ({data:src})); renderPhotos(); }
+  // Usuń załadowany szkic z listy
+  const newDrafts = drafts.filter(x => x._draftId !== draftId);
+  localStorage.setItem(SK_DRAFTS, JSON.stringify(newDrafts));
+  document.getElementById('draftsModal').remove();
   toast('📂 Szkic wczytany!');
   showScreen('nowy');
+}
+
+function deleteDraft(draftId) {
+  const drafts = JSON.parse(localStorage.getItem(SK_DRAFTS) || '[]');
+  const newDrafts = drafts.filter(x => x._draftId !== draftId);
+  localStorage.setItem(SK_DRAFTS, JSON.stringify(newDrafts));
+  if (newDrafts.length) showDraftsModal(newDrafts);
+  else { document.getElementById('draftsModal').remove(); toast('🗑️ Szkic usunięty'); }
 }
 
 async function zapiszIPrzeslij() {
@@ -1229,25 +1260,28 @@ async function zapiszIPrzeslij() {
 
   toast('📤 Wysyłanie na Google Drive...');
   try {
-    const r = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(d)});
-    const json = await r.json().catch(()=>({}));
-
+    // Usuń zdjęcia przed wysłaniem - za duże dla URL
+    const dSend = {...d, photos:[]};
+    const dataStr = encodeURIComponent(JSON.stringify(dSend));
+    const sendUrl = url + '?data=' + dataStr;
+    const r = await fetch(sendUrl, {method:'GET', mode:'cors'});
+    const text = await r.text();
+    let json = {};
+    try { json = JSON.parse(text); } catch(ex) {}
     d.viewUrl = json.viewUrl || null;
     protokoly.push(d);
     localStorage.setItem(SK, JSON.stringify(protokoly));
+    localStorage.removeItem(SK_DRAFT);
+    // Usuń auto-szkic tego formularza
+    const _ad = getForm(); const _drafts2 = JSON.parse(localStorage.getItem(SK_DRAFTS)||'[]').filter(x=>!x._auto); localStorage.setItem(SK_DRAFTS,JSON.stringify(_drafts2));
+    toast('✅ Wysłano na Google Drive!');
     updateBadge(); resetForm();
-
-    if (json.viewUrl) {
-      showLinkModal(json.viewUrl, d.nr);
-    } else {
-      toast(r.ok ? '✅ Zapisano na Google Drive!' : `⚠️ Serwer: ${r.status}`, !r.ok);
-    }
   } catch(e) {
-    // zapisz lokalnie mimo błędu
     protokoly.push(d);
     localStorage.setItem(SK, JSON.stringify(protokoly));
+    localStorage.removeItem(SK_DRAFT);
+    toast('❌ Błąd. Zapisano lokalnie.');
     updateBadge(); resetForm();
-    toast('❌ Błąd połączenia. Zapisano lokalnie.', 1);
   }
 }
 
@@ -1311,16 +1345,17 @@ function wynikIco(w) {
 function renderHistory() {
   const list = document.getElementById('protoList');
   const empty = document.getElementById('emptyList');
-  document.getElementById('stTotal').textContent = protokoly.length;
-  document.getElementById('stOk').textContent = protokoly.filter(p=>p.wynik==='Pozytywny').length;
-  document.getElementById('stWarn').textContent = protokoly.filter(p=>p.wynik==='Pozytywny z uwagami').length;
-  document.getElementById('stFail').textContent = protokoly.filter(p=>p.wynik==='Negatywny').length;
+  const all = allProtokoly.length ? allProtokoly : protokoly;
+  document.getElementById('stTotal').textContent = all.length;
+  document.getElementById('stOk').textContent = all.filter(p=>p.wynik==='Sprawny').length;
+  document.getElementById('stWarn').textContent = all.filter(p=>(p.wynik||'').includes('uwag')).length;
+  document.getElementById('stFail').textContent = all.filter(p=>p.wynik==='Niesprawny').length;
 
-  if (!protokoly.length) { list.innerHTML=''; empty.style.display=''; return; }
+  if (!all.length) { list.innerHTML=''; empty.style.display=''; return; }
   empty.style.display = 'none';
 
-  list.innerHTML = [...protokoly].reverse().map(p => `
-    <div class="proto-card" onclick="showDetail(${p.id})">
+  list.innerHTML = [...all].map(p => `
+    <div class="proto-card" onclick="showDetail('${p.id}')">
       <div class="proto-top">
         <span class="proto-nr">${p.nr||'-'}</span>
         <span class="type-badge tb-${p.typ.toLowerCase()}">${p.typ}</span>
@@ -1354,7 +1389,7 @@ function clearHistory() {
 
 // ===================== MODAL DETAIL =====================
 function showDetail(id) {
-  const p = protokoly.find(x => x.id === id);
+  const p = allProtokoly.find(x => String(x.id) === String(id)) || protokoly.find(x => String(x.id) === String(id));
   if (!p) return;
   const typ = p.typ;
   const allItems = getCL()[typ] || getCL().Inne || CL[typ] || CL.Inne;
@@ -1403,12 +1438,12 @@ function showDetail(id) {
     </div>` : '<div style="margin-bottom:16px"></div>'}
     <div style="font-weight:700;margin-bottom:10px;font-size:13px;color:var(--red2);text-transform:uppercase;letter-spacing:1px">Lista kontrolna</div>
     ${chk}
-    ${p.usterki ? `<div style="margin-top:14px"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Usterki</div><div style="font-size:13px;line-height:1.6">${p.usterki}</div></div>` : ''}
-    ${p.zalecenia ? `<div style="margin-top:14px"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Zalecenia do uszkodzeń</div><div style="font-size:13px;line-height:1.6">${p.zalecenia}</div></div>` : ''}
-    ${p.nieprawidlowosci ? `<div style="margin-top:14px"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Nieprawidłowości</div><div style="font-size:13px;line-height:1.6">${p.nieprawidlowosci}</div></div>` : ''}
-    ${p.zalecenieNieprawidl ? `<div style="margin-top:14px"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Zalecenia do nieprawidłowości</div><div style="font-size:13px;line-height:1.6">${p.zalecenieNieprawidl}</div></div>` : ''}
+    <div style="margin-top:14px"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Usterki</div><div style="font-size:13px;line-height:1.6">${p.usterki||'-'}</div></div>
+    <div style="margin-top:14px"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Zalecenia do uszkodzeń</div><div style="font-size:13px;line-height:1.6">${p.zalecenia||'-'}</div></div>
+    <div style="margin-top:14px"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Nieprawidłowości</div><div style="font-size:13px;line-height:1.6">${p.nieprawidlowosci||'-'}</div></div>
+    <div style="margin-top:14px"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Zalecenia do nieprawidłowości</div><div style="font-size:13px;line-height:1.6">${p.zalecenieNieprawidl||'-'}</div></div>
     ${p.adnotacjeBiuro ? `<div style="margin-top:14px;background:rgba(0,200,255,.06);border:1px solid rgba(0,200,255,.2);border-radius:8px;padding:10px 12px"><div style="font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">🏢 Adnotacje do biura</div><div style="font-size:13px;line-height:1.6">${p.adnotacjeBiuro}</div></div>` : ''}
-    ${p.infoKolejnySerwis ? `<div style="margin-top:10px;background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.2);border-radius:8px;padding:10px 12px"><div style="font-size:11px;color:var(--accent2,#ff6b35);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">🔧 Info do kolejnego serwisu</div><div style="font-size:13px;line-height:1.6">${p.infoKolejnySerwis}</div></div>` : ''}
+    <div style="margin-top:10px;background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.2);border-radius:8px;padding:10px 12px"><div style="font-size:11px;color:var(--accent2,#ff6b35);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">🔧 Info do kolejnego serwisu</div><div style="font-size:13px">${p.infoKolejnySerwis||'-'}</div></div>
     <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)" class="${wynikClass(p.wynik)}">
       ${wynikIco(p.wynik)} ${p.wynik||'Brak'}
     </div>
@@ -1424,7 +1459,7 @@ function showDetail(id) {
       <div style="display:flex;flex-wrap:wrap;gap:6px">${p.photos.map(src=>`<img src="${src}" style="width:72px;height:72px;object-fit:cover;border-radius:8px;cursor:pointer" onclick="window.open('${src}','_blank')">`).join('')}</div>
     </div>` : ''}
     ${p.viewUrl ? `<button class="btn btn-ghost" style="flex:1;margin:0;color:var(--accent)" onclick="showLinkModal('${p.viewUrl}','${p.nr||''}')">🔗 Link</button>` : ''}
-      <button class="btn btn-ghost" style="flex:1;margin:0;color:#e74c3c;border-color:#e74c3c" onclick="delProto(${p.id})">🗑️ Usuń</button>
+      <button class="btn btn-ghost" style="flex:1;margin:0;color:#e74c3c;border-color:#e74c3c" onclick="delProto('${p.id}')">🗑️ Usuń</button>
     </div>
   `;
   document.getElementById('detailModal').classList.add('open');
@@ -1433,10 +1468,55 @@ function showDetail(id) {
 function closeModal() { document.getElementById('detailModal').classList.remove('open'); }
 document.getElementById('detailModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
 
+// ===== SYNC Z SERWERA =====
+async function syncFromServer() {
+  const url = localStorage.getItem('serverUrl');
+  if (!url) return;
+  try {
+    await new Promise((resolve, reject) => {
+      const cbName = 'sync_' + Date.now();
+      const script = document.createElement('script');
+      window[cbName] = function(json) {
+        delete window[cbName];
+        document.head.removeChild(script);
+        if (json.status === 'ok' && Array.isArray(json.protokoly)) {
+          serverProtokoly = json.protokoly;
+        }
+        resolve();
+      };
+      script.onerror = () => { delete window[cbName]; resolve(); };
+      script.src = url + '?list=1&callback=' + cbName;
+      document.head.appendChild(script);
+      setTimeout(() => { delete window[cbName]; resolve(); }, 10000);
+    });
+  } catch(e) {
+    serverProtokoly = [];
+  }
+  // Połącz: serwer + lokalne, bez duplikatów (po id)
+  const localIds = new Set(protokoly.map(p => String(p.id)));
+  const onlyServer = serverProtokoly.filter(p => !localIds.has(String(p.id)));
+  allProtokoly = [...protokoly, ...onlyServer].sort((a,b) => {
+    const da = a.data || '', db = b.data || '';
+    return db.localeCompare(da);
+  });
+}
+
 function delProto(id) {
-  if (!confirm('Usunąć ten protokół?')) return;
-  protokoly = protokoly.filter(p => p.id !== id);
+  // Sprawdź czy to protokół lokalny czy serwerowy
+  const isLocal = protokoly.some(p => String(p.id) === String(id));
+  if (!isLocal) {
+    toast('⚠️ Można usuwać tylko własne protokoły');
+    return;
+  }
+  // Wymaga PIN admina
+  const pin = prompt('Podaj PIN administratora aby usunąć protokół:');
+  if (pin !== localStorage.getItem('adminPin')) {
+    toast('❌ Nieprawidłowy PIN');
+    return;
+  }
+  protokoly = protokoly.filter(p => String(p.id) !== String(id));
   localStorage.setItem(SK, JSON.stringify(protokoly));
+  allProtokoly = allProtokoly.filter(p => String(p.id) !== String(id));
   closeModal(); renderHistory(); updateBadge();
   toast('🗑️ Protokół usunięty');
 }
@@ -1791,168 +1871,142 @@ let _panelTyp   = '';
 let _panelWynik = '';
 let _panelObiekt = null; // null = widok listy obiektów
 
-function panelSetTyp(typ) {
-  _panelTyp = typ;
-  document.querySelectorAll('[id^="pf-"]').forEach(b => b.classList.remove('active'));
-  document.getElementById('pf-' + (typ || 'all')).classList.add('active');
-  _panelObiekt = null;
-  panelRender();
-}
 
-function panelSetWynik(w) {
-  _panelWynik = w;
-  document.querySelectorAll('[id^="pw-"]').forEach(b => b.classList.remove('active'));
-  const map = {'':'all','Sprawny':'ok','Sprawny z uwagami':'uwagi','Niesprawny':'zly','Nie w pełni sprawny':'zly'};
-  document.getElementById('pw-' + (map[w]||'all')).classList.add('active');
-  _panelObiekt = null;
-  panelRender();
-}
+// ===================== PANEL =====================
 
-function panelGetFiltered() {
-  const q = (document.getElementById('panelSearch')?.value || '').toLowerCase();
-  return [...protokoly].reverse().filter(p => {
+function panelGetSrc() {
+  var src = allProtokoly.length ? allProtokoly : protokoly;
+  var q = ((document.getElementById('panelSearch')||{}).value||'').toLowerCase().trim();
+  return src.filter(function(p) {
+    if (!p) return false;
     if (_panelTyp && p.typ !== _panelTyp) return false;
-    if (_panelWynik && !p.wynik?.startsWith(_panelWynik)) return false;
-    if (q && !p.obiekt?.toLowerCase().includes(q)) return false;
+    if (_panelWynik === 'uwagi' && !(p.wynik||'').toLowerCase().includes('uwag')) return false;
+    if (_panelWynik && _panelWynik !== 'uwagi' && !(p.wynik||'').startsWith(_panelWynik)) return false;
+    if (q && !(p.obiekt||'').toLowerCase().includes(q)) return false;
     return true;
   });
 }
 
 function panelRender() {
-  panelRenderStats();
   if (_panelObiekt) {
-    panelRenderProtos(_panelObiekt);
+    panelShowObiekt(_panelObiekt);
   } else {
-    panelRenderObiekty();
+    panelShowLista();
   }
 }
 
-function panelRenderStats() {
-  const all = panelGetFiltered();
-  const sprawne   = all.filter(p => p.wynik?.startsWith('Sprawny') && !p.wynik?.includes('uwag')).length;
-  const uwagi     = all.filter(p => p.wynik?.includes('uwag')).length;
-  const zle       = all.filter(p => p.wynik?.startsWith('Nie') || p.wynik === 'Niesprawny').length;
-  const obiekty   = new Set(all.map(p => p.obiekt)).size;
-  document.getElementById('panelStats').innerHTML = `
-    <div class="stat-box"><div class="stat-box-v" style="color:var(--red2)">${all.length}</div><div class="stat-box-l">Protokołów</div></div>
-    <div class="stat-box"><div class="stat-box-v" style="color:#4caf50">${sprawne}</div><div class="stat-box-l">Sprawnych</div></div>
-    <div class="stat-box"><div class="stat-box-v" style="color:#ff9800">${uwagi}</div><div class="stat-box-l">Z uwagami</div></div>
-    <div class="stat-box"><div class="stat-box-v" style="color:#e74c3c">${zle}</div><div class="stat-box-l">Niesprawnych</div></div>
-  `;
+function panelSetTyp(typ) {
+  _panelTyp = typ;
+  _panelObiekt = null;
+  document.querySelectorAll('[id^="pf-"]').forEach(function(b){b.classList.remove('active');});
+  var el = document.getElementById('pf-'+(typ||'all'));
+  if(el) el.classList.add('active');
+  panelRender();
 }
 
-function panelRenderObiekty() {
-  const all = panelGetFiltered();
-  document.getElementById('panelProtoView').style.display = 'none';
-  const el = document.getElementById('panelObiektView');
-  el.style.display = '';
+function panelSetWynik(w) {
+  _panelWynik = w;
+  _panelObiekt = null;
+  document.querySelectorAll('[id^="pw-"]').forEach(function(b){b.classList.remove('active');});
+  var map = {'':'all','Sprawny':'ok','uwagi':'uwagi','Niesprawny':'zly'};
+  var el = document.getElementById('pw-'+(map[w]||'all'));
+  if(el) el.classList.add('active');
+  panelRender();
+}
 
-  if (!all.length) {
-    el.innerHTML = '<div style="text-align:center;padding:40px 20px;color:var(--muted)"><div style="font-size:40px;margin-bottom:12px">📭</div>Brak protokołów dla wybranych filtrów</div>';
+function panelShowLista() {
+  var src = panelGetSrc();
+  document.getElementById('panelProtoView').style.display = 'none';
+  document.getElementById('panelObiektView').style.display = '';
+
+  // Statystyki
+  var sprawne = src.filter(function(p){return (p.wynik||'').startsWith('Sprawny')&&!(p.wynik||'').includes('uwag');}).length;
+  var uwagi = src.filter(function(p){return (p.wynik||'').includes('uwag');}).length;
+  var zle = src.filter(function(p){return (p.wynik||'').startsWith('Nie')||(p.wynik||'')==='Niesprawny';}).length;
+  document.getElementById('panelStats').innerHTML =
+    '<div class="stat-box"><div class="stat-box-v" style="color:var(--red2)">'+src.length+'</div><div class="stat-box-l">Protokołów</div></div>'+
+    '<div class="stat-box"><div class="stat-box-v" style="color:#4caf50">'+sprawne+'</div><div class="stat-box-l">Sprawnych</div></div>'+
+    '<div class="stat-box"><div class="stat-box-v" style="color:#ff9800">'+uwagi+'</div><div class="stat-box-l">Z uwagami</div></div>'+
+    '<div class="stat-box"><div class="stat-box-v" style="color:#e74c3c">'+zle+'</div><div class="stat-box-l">Niesprawnych</div></div>';
+
+  if (!src.length) {
+    document.getElementById('panelObiektView').innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted)"><div style="font-size:40px;margin-bottom:12px">📭</div>Brak protokołów</div>';
     return;
   }
 
   // Grupuj po obiekcie
-  const grupy = {};
-  all.forEach(p => {
-    const k = p.obiekt || 'Brak nazwy';
+  var grupy = {};
+  src.forEach(function(p) {
+    var k = (p.obiekt||'Brak nazwy').trim();
     if (!grupy[k]) grupy[k] = [];
     grupy[k].push(p);
   });
 
-  // Sortuj obiekty wg daty ostatniego protokołu
-  const sorted = Object.entries(grupy).sort((a,b) => {
-    const da = a[1][0]?.data || '';
-    const db = b[1][0]?.data || '';
-    return db.localeCompare(da);
+  var html = '';
+  Object.keys(grupy).sort(function(a,b){
+    return (grupy[b][0].data||'').localeCompare(grupy[a][0].data||'');
+  }).forEach(function(nazwa) {
+    var protos = grupy[nazwa];
+    var last = protos[0];
+    var kolor = (last.wynik||'').startsWith('Nie') ? '#e74c3c' : (last.wynik||'').includes('uwag') ? '#ff9800' : '#4caf50';
+    var ico = (last.wynik||'').startsWith('Nie') ? '❌' : (last.wynik||'').includes('uwag') ? '⚠️' : '✅';
+    var typy = protos.map(function(p){return p.typ;}).filter(function(v,i,a){return a.indexOf(v)===i;}).join(', ');
+    html += '<div class="obj-card" data-nazwa="'+encodeURIComponent(nazwa)+'" onclick="panelShowObiekt(decodeURIComponent(event.currentTarget.dataset.nazwa))">'; 
+    html += '<div class="obj-name">'+nazwa+'</div>';
+    html += '<div class="obj-meta"><span>📁 '+protos.length+' protokół'+(protos.length===1?'':'ów')+'</span><span>🔧 '+typy+'</span></div>';
+    html += '<div class="obj-last"><div style="font-size:12px;color:var(--muted)">Ostatni: <b style="color:var(--text)">'+last.data+'</b> · '+(last.rodzaj||'')+'</div>';
+    html += '<div style="font-size:12px;font-weight:700;color:'+kolor+'">'+ico+' '+(last.wynik||'-')+'</div></div></div>';
   });
-
-  el.innerHTML = sorted.map(([nazwa, protos]) => {
-    const last = protos[0];
-    const wynikColor = last.wynik?.startsWith('Nie') ? '#e74c3c'
-                     : last.wynik?.includes('uwag') ? '#ff9800' : '#4caf50';
-    const wynikIco   = last.wynik?.startsWith('Nie') ? '❌'
-                     : last.wynik?.includes('uwag') ? '⚠️' : '✅';
-    const typy = [...new Set(protos.map(p=>p.typ))].join(', ');
-
-    return `<div class="obj-card" data-n="${encodeURIComponent(nazwa)}" onclick="panelOpenObiekt(decodeURIComponent(this.dataset.n))">
-      <div class="obj-name">${nazwa}</div>
-      <div class="obj-meta">
-        <span>📁 ${protos.length} protokół${protos.length===1?'':'ów'}</span>
-        <span>🔧 ${typy}</span>
-      </div>
-      <div class="obj-last">
-        <div style="font-size:12px;color:var(--muted)">Ostatni: <b style="color:var(--text)">${last.data}</b> · ${last.rodzaj}</div>
-        <div style="font-size:12px;font-weight:700;color:${wynikColor}">${wynikIco} ${last.wynik||'-'}</div>
-      </div>
-    </div>`;
-  }).join('');
+  document.getElementById('panelObiektView').innerHTML = html;
 }
 
-function panelOpenObiekt(nazwa) {
+function panelShowObiekt(nazwa) {
   _panelObiekt = nazwa;
-  panelRenderProtos(nazwa);
-}
-
-function panelRenderProtos(nazwa) {
   document.getElementById('panelObiektView').style.display = 'none';
-  const el = document.getElementById('panelProtoView');
+  var el = document.getElementById('panelProtoView');
   el.style.display = '';
 
-  const protos = panelGetFiltered().filter(p => (p.obiekt||'Brak nazwy') === nazwa);
+  var src = allProtokoly.length ? allProtokoly : protokoly;
+  var protos = src.filter(function(p){ return p && (p.obiekt||'Brak nazwy').trim() === nazwa.trim(); });
 
-  // Statystyki obiektu
-  const sprawne = protos.filter(p => p.wynik?.startsWith('Sprawny') && !p.wynik?.includes('uwag')).length;
-  const uwagi   = protos.filter(p => p.wynik?.includes('uwag')).length;
-  const zle     = protos.filter(p => p.wynik?.startsWith('Nie') || p.wynik === 'Niesprawny').length;
-  const typy    = [...new Set(protos.map(p=>p.typ))].join(' · ');
+  var sprawne = protos.filter(function(p){return (p.wynik||'').startsWith('Sprawny')&&!(p.wynik||'').includes('uwag');}).length;
+  var uwagi = protos.filter(function(p){return (p.wynik||'').includes('uwag');}).length;
+  var zle = protos.filter(function(p){var w=p.wynik||'';return w.startsWith('Nie')||w==='Niesprawny';}).length;
+  var typy = protos.map(function(p){return p.typ;}).filter(function(v,i,a){return a.indexOf(v)===i;}).join(' / ');
 
-  el.innerHTML = `
-    <div class="panel-back" onclick="panelBackToList()">← Powrót do listy obiektów</div>
+  var html = '<div onclick="panelBackToList()" style="display:flex;align-items:center;gap:6px;padding-bottom:12px;color:var(--red2);font-size:14px;font-weight:700;cursor:pointer">&#8592; Powrót do listy</div>';
+  html += '<div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px">';
+  html += '<div style="font-size:17px;font-weight:800;margin-bottom:6px">'+nazwa+'</div>';
+  html += '<div style="font-size:12px;color:var(--muted);margin-bottom:12px">Systemy: '+(typy||'-')+'</div>';
+  html += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">';
+  html += '<div class="sbox"><div class="sbox-v" style="color:#4caf50">'+sprawne+'</div><div class="sbox-l">Sprawnych</div></div>';
+  html += '<div class="sbox"><div class="sbox-v" style="color:#ff9800">'+uwagi+'</div><div class="sbox-l">Z uwagami</div></div>';
+  html += '<div class="sbox"><div class="sbox-v" style="color:#e74c3c">'+zle+'</div><div class="sbox-l">Niesprawnych</div></div>';
+  html += '</div></div>';
+  html += '<div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Historia protokołów ('+protos.length+')</div>';
 
-    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px">
-      <div style="font-size:18px;font-weight:800;margin-bottom:8px">${nazwa}</div>
-      <div style="font-size:12px;color:var(--muted);margin-bottom:12px">Systemy: ${typy}</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
-        <div class="stat-box"><div class="stat-box-v" style="color:#4caf50">${sprawne}</div><div class="stat-box-l">Sprawnych</div></div>
-        <div class="stat-box"><div class="stat-box-v" style="color:#ff9800">${uwagi}</div><div class="stat-box-l">Z uwagami</div></div>
-        <div class="stat-box"><div class="stat-box-v" style="color:#e74c3c">${zle}</div><div class="stat-box-l">Niesprawnych</div></div>
-      </div>
-    </div>
-
-    <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">
-      Historia protokołów (${protos.length})
-    </div>
-
-    ${protos.map(p => {
-      const wynikColor = p.wynik?.startsWith('Nie') ? '#e74c3c'
-                       : p.wynik?.includes('uwag') ? '#ff9800' : '#4caf50';
-      const wynikIco   = p.wynik?.startsWith('Nie') ? '❌'
-                       : p.wynik?.includes('uwag') ? '⚠️' : '✅';
-      const hasPhotos  = p.photos?.length > 0;
-      return `<div class="panel-proto-card" onclick="showDetail(${p.id})">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <span class="type-badge tb-${p.typ.toLowerCase()}">${p.typ}</span>
-          <span style="font-size:12px;color:var(--muted);flex:1">${p.rodzaj}</span>
-          <span style="font-size:12px;color:var(--muted)">${p.data}</span>
-        </div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:6px">👤 ${p.serwisant||'-'}</div>
-        ${p.usterki ? `<div style="font-size:12px;color:#ff9800;margin-bottom:4px">⚠️ ${p.usterki.substring(0,80)}${p.usterki.length>80?'…':''}</div>` : ''}
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
-          <div style="font-size:13px;font-weight:700;color:${wynikColor}">${wynikIco} ${p.wynik||'-'}</div>
-          <div style="display:flex;gap:8px;font-size:11px;color:var(--muted)">
-            ${hasPhotos ? `<span>📷 ${p.photos.length}</span>` : ''}
-            <span style="color:var(--red2)">Szczegóły →</span>
-          </div>
-        </div>
-      </div>`;
-    }).join('')}
-  `;
+  protos.forEach(function(p) {
+    var kolor = (p.wynik||'').startsWith('Nie') ? '#e74c3c' : (p.wynik||'').includes('uwag') ? '#ff9800' : '#4caf50';
+    var ico = (p.wynik||'').startsWith('Nie') ? '❌' : (p.wynik||'').includes('uwag') ? '⚠️' : '✅';
+    html += '<div class="pp-card" data-pid="'+encodeURIComponent(String(p.id))+'" onclick="showDetail(decodeURIComponent(event.currentTarget.dataset.pid))">'; 
+    html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">';
+    html += '<span class="type-badge tb-'+(p.typ||'').toLowerCase()+'">'+p.typ+'</span>';
+    html += '<span style="font-size:12px;color:var(--muted);flex:1">'+(p.rodzaj||'')+'</span>';
+    html += '<span style="font-size:12px;color:var(--muted)">'+(p.data||'')+'</span></div>';
+    html += '<div style="font-size:13px;color:var(--muted);margin-bottom:6px">&#128100; '+(p.serwisant||'-')+'</div>';
+    if(p.usterki) html += '<div style="font-size:12px;color:#ff9800;margin-bottom:6px">&#9888; '+p.usterki.substring(0,80)+(p.usterki.length>80?'…':'')+'</div>';
+    if(p.zalecenieNieprawidl && p.zalecenieNieprawidl!=='-') html += '<div style="font-size:12px;color:#e74c3c;margin-bottom:6px">&#9888; Zal.niepr.: '+p.zalecenieNieprawidl.substring(0,60)+(p.zalecenieNieprawidl.length>60?'…':'')+'</div>';
+    if(p.infoKolejnySerwis && p.infoKolejnySerwis!=='-') html += '<div style="font-size:12px;color:var(--red2);margin-bottom:6px">🔧 '+p.infoKolejnySerwis.substring(0,60)+(p.infoKolejnySerwis.length>60?'…':'')+'</div>';
+    html += '<div style="display:flex;align-items:center;justify-content:space-between">';
+    html += '<div style="font-size:13px;font-weight:700;color:'+kolor+'">'+ico+' '+(p.wynik||'-')+'</div>';
+    html += '<span style="font-size:11px;color:var(--red2)">Szczegóły →</span></div></div>';
+  });
+  el.innerHTML = html;
 }
 
 function panelBackToList() {
   _panelObiekt = null;
-  panelRender();
+  panelShowLista();
 }
 
 // ===================== ZDJĘCIA =====================
@@ -2087,6 +2141,130 @@ function closePinModal() {
 // Zablokuj Admin po wyjściu z zakładki
 const _origShowScreen = showScreen;
 
+
+// ===================== AUTOCOMPLETE OBIEKTÓW =====================
+
+let _acSelected = -1;
+
+function autocompleteObiekt(val) {
+  const list = document.getElementById('ac-list');
+  const q = val.trim().toLowerCase();
+  if (!q || _obiektyCache.length === 0) { list.style.display='none'; return; }
+
+  const matches = _obiektyCache.filter(o =>
+    o.obiekt.toLowerCase().includes(q)
+  ).slice(0, 12);
+
+  if (!matches.length) { list.style.display='none'; return; }
+
+  _acSelected = -1;
+  list.innerHTML = matches.map((o, i) => `
+    <div class="ac-item" data-i="${i}"
+      style="padding:10px 14px; cursor:pointer; border-bottom:1px solid #f0f0f0; font-size:14px"
+      onmousedown="selectObiekt(${i})"
+      onmouseover="hoverAC(${i})">
+      <div style="font-weight:700;color:#1a1a2e">${o.obiekt}</div>
+      <div style="font-size:12px;color:#888;margin-top:2px">${o.modelCentrali}${o.iloscCentral?' · '+o.iloscCentral+' szt.':''}${o.lokalizacja?' · '+o.lokalizacja:''}</div>
+    </div>`).join('');
+
+  list._matches = matches;
+  list.style.display = 'block';
+}
+
+function hoverAC(i) {
+  _acSelected = i;
+  document.querySelectorAll('.ac-item').forEach((el,j)=>{
+    el.style.background = j===i ? '#e3f2fd' : '';
+  });
+}
+
+function autocompleteKey(e) {
+  const list = document.getElementById('ac-list');
+  const items = list.querySelectorAll('.ac-item');
+  if (!items.length) return;
+  if (e.key === 'ArrowDown') { e.preventDefault(); hoverAC(Math.min(_acSelected+1, items.length-1)); }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); hoverAC(Math.max(_acSelected-1, 0)); }
+  else if (e.key === 'Enter' && _acSelected >= 0) { e.preventDefault(); selectObiekt(_acSelected); }
+  else if (e.key === 'Escape') hideAC();
+}
+
+function selectObiekt(i) {
+  const list = document.getElementById('ac-list');
+  const o = list._matches && list._matches[i];
+  if (!o) return;
+  document.getElementById('obiekt').value = o.obiekt;
+  if (o.modelCentrali) document.getElementById('modelCentrali').value = o.modelCentrali;
+  if (o.iloscCentral) document.getElementById('iloscCentral').value = o.iloscCentral;
+  if (o.lokalizacja) document.getElementById('lokalizacjaCentral').value = o.lokalizacja;
+  hideAC();
+  toast('📋 Dane obiektu uzupełnione', 0);
+}
+
+function hideAC() {
+  const list = document.getElementById('ac-list');
+  if (list) list.style.display = 'none';
+}
+
+function loadObiekty() {
+  const url = localStorage.getItem('serverUrl');
+  if (!url) return;
+  const cb = 'cb_obiekty_' + Date.now();
+  window[cb] = function(res) {
+    delete window[cb];
+    const s = document.getElementById('ac-script');
+    if (s) s.remove();
+    if (res && res.obiekty && res.obiekty.length) {
+      _obiektyCache = res.obiekty;
+      localStorage.setItem('profipoz_obiekty', JSON.stringify(_obiektyCache));
+    }
+  };
+  const script = document.createElement('script');
+  script.id = 'ac-script';
+  script.src = url + '?obiekty=1&callback=' + cb;
+  document.body.appendChild(script);
+}
+
+// Gdy użytkownik wypełnia formularz i wychodzi – zapisz obiekt do bazy (jeśli nowy)
+function maybeSaveObiektToServer(d) {
+  if (!d.obiekt) return;
+  const url = localStorage.getItem('serverUrl');
+  if (!url) return;
+  const exists = _obiektyCache.some(o => o.obiekt.toLowerCase() === d.obiekt.toLowerCase());
+  // Zawsze aktualizuj model/lokalizację na serwerze po każdym protokole
+  const obj = {
+    obiekt: d.obiekt,
+    modelCentrali: d.modelCentrali || '',
+    iloscCentral: d.iloscCentral || '',
+    lokalizacja: d.lokalizacjaCentral || '',
+  };
+  // Aktualizuj lokalny cache
+  const idx = _obiektyCache.findIndex(o => o.obiekt.toLowerCase() === d.obiekt.toLowerCase());
+  if (idx >= 0) {
+    if (d.modelCentrali) _obiektyCache[idx].modelCentrali = d.modelCentrali;
+    if (d.iloscCentral) _obiektyCache[idx].iloscCentral = d.iloscCentral;
+    if (d.lokalizacjaCentral) _obiektyCache[idx].lokalizacja = d.lokalizacjaCentral;
+  } else {
+    _obiektyCache.push({ obiekt: d.obiekt, modelCentrali: d.modelCentrali||'', iloscCentral: d.iloscCentral||'', lokalizacja: d.lokalizacjaCentral||'' });
+  }
+  localStorage.setItem('profipoz_obiekty', JSON.stringify(_obiektyCache));
+
+  // Wyślij do serwera
+  const cbName = 'cb_saveobj_' + Date.now();
+  window[cbName] = function(r) { delete window[cbName]; };
+  const script = document.createElement('script');
+  script.src = url + '?saveObiekt=' + encodeURIComponent(JSON.stringify(obj)) + '&callback=' + cbName;
+  document.body.appendChild(script);
+}
+
+
+function loadObiektyManual() {
+  const url = document.getElementById('serverUrl').value || localStorage.getItem('serverUrl');
+  if (!url) { toast('⚠️ Podaj adres serwera', 1); return; }
+  localStorage.setItem('serverUrl', url);
+  toast('⏳ Ładowanie obiektów...', 0);
+  loadObiekty();
+  setTimeout(() => toast('✅ Obiekty załadowane: ' + _obiektyCache.length, 0), 2000);
+}
 </script>
 
 <!-- MODAL PIN ADMIN -->
